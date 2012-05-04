@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.params=proteinClass
+comment0.target=Gene(java.lang.Class)
+comment1.params=newGene
+comment1.target=Gene\ insertBefore(Gene)
+comment2.params=newGene
+comment2.target=Gene\ insertAfter(Gene)
+comment3.params=
+comment3.target=Protein\ express()
+comment4.params=
+comment4.target=boolean\ isActive()
+comment5.params=
+comment5.target=void\ activate()
+comment6.params=
+comment6.target=void\ deactivate()
+numComments=7

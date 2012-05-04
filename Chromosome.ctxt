@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.params=
+comment0.target=void\ act()
+comment0.text=\r\n\ Act\ -\ do\ whatever\ the\ Chromosome\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
+comment1.params=newGene
+comment1.target=Chromosome\ insertBegining(Gene)
+comment2.params=newGene
+comment2.target=Chromosome\ insertEnd(Gene)
+comment3.params=gene
+comment3.target=Chromosome\ remove(Gene)
+comment4.params=
+comment4.target=void\ mutate()
+numComments=5
