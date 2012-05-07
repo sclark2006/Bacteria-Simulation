@@ -12,9 +12,11 @@ public enum Gene
     BUILD_DIGESTIVE_ORGAN(DigestiveOrgan.class),
     BUILD_MEMBRANE(Membrane.class),
     BUILD_CYTOSOME(Cytosome.class),
+    BUILD_RYBOSOME(Rybosome.class),
     BUILD_LIGHT_PERCEIVER_ORGAN(LightPerceiver.class),
     BUILD_LIGHT_EMITTER_ORGAN(LightEmitter.class),
     //Enzyme Builders
+    BUILD_ORGAN_BUILDER_STOPPER(OrganBuilderStopper.class),
     BUILD_MEMBRANE_DESTROYER(MembraneDestroyer.class),
     BUILD_MEMBRANE_DIVIDER(MembraneDivider.class),
     BUILD_CYTOSOME_DIVIDER(CytosomeDivider.class),
@@ -62,6 +64,10 @@ public enum Gene
            this.next = newGene;
         }
         return this;        
+    }
+    
+    public Gene add(Gene newGene) {
+        return this.insertAfter(newGene);
     }
     
     public Protein express() {

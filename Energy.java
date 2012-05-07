@@ -3,17 +3,17 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class Energy here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Frederick Clark 
+ * @version May 5, 2012. Constructor added
  */
-public class Energy extends Actor
+public abstract class Energy extends Actor
 {
-    /**
-     * Act - do whatever the Energy wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act() 
-    {
-        // Add your action code here.
-    }    
+    protected int level = 0;
+    public Energy(int initialLevel) {
+        this.level = initialLevel;
+    }
+    
+    public int getLevel() {
+        return this.level;
+    }
 }

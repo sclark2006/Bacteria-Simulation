@@ -3,14 +3,25 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class Chromosome here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Frederick Clark 
+ * @version May 2, 2012
  */
 public class Chromosome extends Organ
 {
     public Gene first;
     public Gene last;
 
+    public Chromosome(Organ parentOrgan){
+        //31,53
+        super(30,30,OrganShape.IMAGE,parentOrgan);
+        createSelfImage();
+        updateImage(this.getRandomLocation(20));
+    }
+    
+    public void createSelfImage() {
+        setImage("chromosome1.gif");
+    }
+    
     /**
      * Act - do whatever the Chromosome wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -39,6 +50,10 @@ public class Chromosome extends Organ
         else
             last.insertAfter(newGene);
         return this;
+    }
+    
+    public Chromosome add(Gene newGene) {
+        return insertEnd(newGene);
     }
     
     public Chromosome remove(Gene gene) {
