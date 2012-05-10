@@ -1,42 +1,71 @@
+
+import java.lang.reflect.Constructor;
+
 /**
  * The class Gene represents a simple Gene in the entire Genoma. A Gene can express as a Protein, so 
  * we can build Organs or Enzymes.
  * 
  * @author Frederick Clark
- * @version May 3, 2012
+ * @version May 8, 2012
  */
-public enum Gene  
-{   
-   //Organ Builders
-    BUILD_MOTION_ORGAN(MotionOrgan.class), 
-    BUILD_DIGESTIVE_ORGAN(DigestiveOrgan.class),
-    BUILD_MEMBRANE(Membrane.class),
-    BUILD_CYTOSOME(Cytosome.class),
-    BUILD_RYBOSOME(Rybosome.class),
-    BUILD_LIGHT_PERCEIVER_ORGAN(LightPerceiver.class),
-    BUILD_LIGHT_EMITTER_ORGAN(LightEmitter.class),
-    //Enzyme Builders
-    BUILD_ORGAN_BUILDER_STOPPER(OrganBuilderStopper.class),
-    BUILD_MEMBRANE_DESTROYER(MembraneDestroyer.class),
-    BUILD_MEMBRANE_DIVIDER(MembraneDivider.class),
-    BUILD_CYTOSOME_DIVIDER(CytosomeDivider.class),
-    BUILD_DUPLICATION_STARTER(DuplicationStarter.class),
-    BUILD_DUPLICATION_STOPPER(DuplicationStopper.class),
-    BUILD_MOTION_STARTER(MotionStarter.class),
-    BUILD_CHROMOSOME_CLONER(ChromosomeCloner.class);
+public final class Gene extends ExtensibleEnum<Gene> {
+    public static final Gene 
+            
+    BuildMotionOrgan = newGene(MotionOrgan.class, new Size(10,30), Shape.LINE), 
+    BuildDigestiveOrgan =newGene(DigestiveOrgan.class, new Size(30,30), Shape.CIRCLE),
+    BuildMembrane = newGene(Membrane.class, null, Shape.CIRCLE),
+    BuildCytosome = newGene(Cytosome.class,null,Shape.CIRCLE),
+    BuildRybosome = newGene(Rybosome.class,new Size(6,6), Shape.TRIANGLE),
+    BuildLightPerceiver = newGene(LightPerceiver.class, new Size(16,10),Shape.CIRCLE),
+    BuildLightEmitter = newGene(LightEmitter.class, new Size(16,10), Shape.CIRCLE),
     
-    private Class<? extends Protein> proteinClass;
+    BuildOrganBuilderStopper = newGene(OrganBuilderStopper.class, 10),
+    BuildMembraneDestroyer = newGene(MembraneDestroyer.class,0),
+    BuildMembraneDivider = newGene(MembraneDivider.class,0),
+    BuildCytosomeDivider = newGene(CytosomeDivider.class,0),
+    BuildDuplicationStarter = newGene(DuplicationStarter.class,5),
+    BuildDuplicationStopper = newGene(DuplicationStopper.class,5),
+    BuildMotionStarter = newGene(MotionStarter.class,5),
+    //BuildMotionStopper = newEnzymeGene(MotionStopper.class,5),
+    BuildChromosomeClonner = newGene(ChromosomeCloner.class,0);
+    
+    private Class<? extends Protein> proteinToBuild;
+    private Object[] properties;
+    
+   
+    private boolean active;
+
     public Chromosome chromosome;
     public Gene next;    
     public Gene previous;
-    private boolean active;
     
-    private Gene(Class<? extends Protein> proteinClass) {
-        this.proteinClass = proteinClass;
+    
+    protected Gene(String name, int ordinal)
+    {
+        super(name,ordinal);
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public Class<? extends Protein> getProteinToBuild() {
+        return proteinToBuild;
+    }
+
+    public Object[] getProperties() {
+        return properties;
+    }
+        
+    public void activate() {
+        active = true;
     }
     
+    public void deactivate() {
+        active = false;
+    }
     
-    public Gene insertBefore(Gene newGene) {
+  public Gene insertBefore(Gene newGene) {
         if(newGene != null)
         {
             newGene.chromosome = this.chromosome;
@@ -70,24 +99,54 @@ public enum Gene
         return this.insertAfter(newGene);
     }
     
-    public Protein express() {
+    public <T extends Organ> T expressOrgan(Cell cell, Organ parentOrgan) {
         try {
-            return (Protein) proteinClass.newInstance();
+            Constructor ctor;
+            T organ = null;
+            //Is an Organ?
+            if(proteinToBuild.isAssignableFrom(Organ.class)) {
+                ctor = proteinToBuild.getConstructors()[0];
+                Object[] values = new Object[this.properties.length + 2];
+                values[0] = parentOrgan;
+                values[1] = cell;
+                for(int i=2; i < values.length; i++)
+                    values[i] = this.properties[i-2];
+                organ = (T)ctor.newInstance(this.properties);   
+            }
+            
+            return organ;
         }
+        //catch(NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
         catch(Exception e) {
             return null;
+            //throw new IllegalArgumentException("The class "+enumType.getSimpleName() + " doesn't inherits " + ExtensibleEnum.class.getSimpleName());
+        } 
+    }
+    
+    public <T extends Enzyme> T expressEnzyme() {
+        try {
+            Constructor ctor;
+            T enzyme = null;
+            //Is an Enzyme?
+            if(proteinToBuild.isAssignableFrom(Enzyme.class)) {
+                ctor = proteinToBuild.getConstructors()[0];
+                enzyme = (T)ctor.newInstance(this.properties);
+            }
+            
+            return enzyme;
         }
+        //catch(NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+        catch(Exception e) {
+            return null;
+            //throw new IllegalArgumentException("The class "+enumType.getSimpleName() + " doesn't inherits " + ExtensibleEnum.class.getSimpleName());
+        } 
     }
     
-    public boolean isActive() {
-        return active;
+    public static Gene newGene(Class<? extends Protein> proteinToBuild, Object... properties) {
+        Gene gene = ExtensibleEnum.newInstance(Gene.class,"Build"+proteinToBuild.getSimpleName());
+        gene.proteinToBuild = proteinToBuild;
+        gene.properties = properties;
+        return gene;
     }
     
-    public void activate() {
-        active = true;
-    }
-    
-    public void deactivate() {
-        active = false;
-    }
 }

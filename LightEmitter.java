@@ -1,4 +1,3 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
  * Write a description of class LightEmitter here.
@@ -6,12 +5,19 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Frederick Clark
  * @version May 2, 2012
  */
-public class LightEmitter extends Emitter
+public final class LightEmitter extends Emitter
 {
-    public LightEmitter(int width, int height, OrganShape shape, Organ parentOrgan, int maxLevel){
-     super(width,height,shape,parentOrgan, maxLevel);
+    public LightEmitter(Cell cell, Organ parentOrgan, Size size, Shape shape, int maxLevel){
+         super(cell,parentOrgan,size,shape,maxLevel);
+         createSelfImage();
+         updateImage(this.getRandomLocation(20));
     }
-    public void createSelfImage() {}
+    //TODO: Implement this method
+    @Override
+    public void createSelfImage() {
+        throw new UnsupportedOperationException();
+    }
+    @Override
     public void emit() {
     } 
 }

@@ -1,4 +1,3 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
  * Write a description of class Chromosome here.
@@ -6,18 +5,21 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Frederick Clark 
  * @version May 2, 2012
  */
-public class Chromosome extends Organ
+public final class Chromosome extends Organ
 {
     public Gene first;
     public Gene last;
 
-    public Chromosome(Organ parentOrgan){
-        //31,53
-        super(30,30,OrganShape.IMAGE,parentOrgan);
-        createSelfImage();
-        updateImage(this.getRandomLocation(20));
+    public Chromosome(Cell cell, Organ parentOrgan,Size size, Shape shape ){
+         super( cell,parentOrgan,size,shape);
+         createSelfImage();
+         updateImage(this.getRandomLocation(20));
     }
-    
+    public Chromosome(Cytosome cytosome){
+        this(cytosome.getCell(),cytosome,new Size(30,30),Shape.IMAGE);
+    }
+
+    @Override
     public void createSelfImage() {
         setImage("chromosome1.gif");
     }
@@ -26,6 +28,7 @@ public class Chromosome extends Organ
      * Act - do whatever the Chromosome wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    @Override
     public void act() 
     {
         // Add your action code here.

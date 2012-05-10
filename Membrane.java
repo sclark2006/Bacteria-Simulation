@@ -1,4 +1,3 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.awt.Color;
 
 /**
@@ -7,15 +6,15 @@ import java.awt.Color;
  * @author Frederick Clark
  * @version May 2, 2012
  */
-public class Membrane extends Organ
+public final class Membrane extends Organ
 {
-    public Membrane(int width, int height, OrganShape shape, Cell cell){
-         super(width,height,shape,null, cell);
-         this.cell = cell;
+    public Membrane(Cell cell, Organ parentOrgan, Size size, Shape shape ){
+         super(cell, parentOrgan, size,shape);
          createSelfImage();
          updateImage(new Location(0,0));
     }
     
+    @Override
     public void createSelfImage() {
         this.cell.getImage().clear();
         this.getImage().setColor(Color.GREEN );
@@ -26,6 +25,7 @@ public class Membrane extends Organ
      * Act - do whatever the Membrane wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    @Override
     public void act() 
     {
         // Add your action code here.

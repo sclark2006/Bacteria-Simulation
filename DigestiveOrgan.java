@@ -1,4 +1,3 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
  * Write a description of class DigestiveOrgan here.
@@ -6,17 +5,24 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Frederick Clark 
  * @version May 2, 2012
  */
-public class DigestiveOrgan extends Organ
+public final class DigestiveOrgan extends Organ
 {
-    public DigestiveOrgan(int width, int height, OrganShape shape, Organ parentOrgan){
-     super(width,height,shape,parentOrgan);
+     public DigestiveOrgan(Cell cell, Organ parentOrgan, Size size, Shape shape){
+         super(cell,parentOrgan,size,shape);
+         createSelfImage();
+         updateImage(this.getRandomLocation(20));
     }
     
-    public void createSelfImage() {}
+     //TODO: implement this method
+    @Override
+    public void createSelfImage() {
+        throw new UnsupportedOperationException();
+    }
     /**
      * Act - do whatever the DigestiveOrgan wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    @Override
     public void act() 
     {
         // Add your action code here.

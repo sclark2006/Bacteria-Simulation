@@ -8,10 +8,17 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class LightPerceiver extends Perceiver
 {
-    public LightPerceiver(int width, int height, OrganShape shape, Organ parentOrgan, int minLevel, int maxLevel){
-     super(width,height,shape,parentOrgan, minLevel, maxLevel);
+    public LightPerceiver(Cell cell, Organ parentOrgan, Size size, Shape shape, int minLevel, int maxLevel){
+     super(cell,parentOrgan,size,shape, minLevel, maxLevel);
     }
-    public void createSelfImage() {}
+    
+    //TODO: Implement the createSelfImage method
+    @Override
+    public void createSelfImage() {
+        throw new UnsupportedOperationException();
+    }
+    
+    @Override
     public void perceive() {
     }
 }

@@ -1,7 +1,6 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Enzime here.
+ * Write a description of class Enzyme here.
  * 
  * @author Frederick Clark
  * @version May 2, 2012

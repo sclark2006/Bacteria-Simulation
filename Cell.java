@@ -14,21 +14,20 @@ import java.util.Set;
  */
 public class Cell extends Actor
 {
-    public static final int WIDTH = 150;
-    public static final int HEIGHT = 90;
+    //public static final int WIDTH = 150;
+    //public static final int HEIGHT = 90;
     
+    public static final Size SIZE = new Size(150,90);
     public Membrane membrane;
     public Cytosome cytosome;
     private List<Organ> organelles;
     private Set<Chromosome> genome;
-    private int height;
-    private int width;
+    private Size size;
     
     public Cell() {
         super();
-        this.width = WIDTH;
-        this.height = HEIGHT;
-        this.membrane = new Membrane(WIDTH,HEIGHT,OrganShape.CIRCLE,this);
+        this.size = SIZE;
+        this.membrane = new Membrane(this,null,size,Shape.CIRCLE);
         this.cytosome = new Cytosome(this.membrane);
         this.genome = initialGenome();
         this.organelles = new ArrayList<Organ>();
@@ -43,6 +42,7 @@ public class Cell extends Actor
         this.genome = genome;
     }
     
+    @Override
     protected void addedToWorld(World world) {
         //System.out.println("Added Cell to the world " + world.toString());
         //int xpos = getX() + (int)(width / 2);
@@ -57,11 +57,16 @@ public class Cell extends Actor
     public Set<Chromosome> getGenome() {
         return this.genome;
     }
-   
+ 
+    public Size getSize() {
+        return size;
+    }
+ 
     /**
      * Act - do whatever the Cell wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    @Override
     public void act() 
     {
          for(Organ organ : organelles) 
@@ -70,23 +75,15 @@ public class Cell extends Actor
          }
     }
     
-    public int getHeight() {
-        return this.height;
-    }
-    
-    public int getWidth() {
-        return this.width;
-    }
-    
     private Set<Chromosome> initialGenome() {
         //Creates a Set to store the chromosome created
         Set<Chromosome> initGenome = new HashSet<Chromosome>();
         Chromosome chromosome = new Chromosome(this.cytosome);
         //fill the chromosome with the needed genes
-        chromosome.add(Gene.BUILD_ORGAN_BUILDER_STOPPER).
-                   add(Gene.BUILD_RYBOSOME).
-                   add(Gene.BUILD_MOTION_ORGAN).
-                   add(Gene.BUILD_LIGHT_PERCEIVER_ORGAN); 
+        chromosome.add(Gene.BuildOrganBuilderStopper).
+                   add(Gene.BuildRybosome).
+                   add(Gene.BuildMotionOrgan).
+                   add(Gene.BuildLightPerceiver); 
                     
         
         initGenome.add(chromosome);

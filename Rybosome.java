@@ -6,17 +6,19 @@
  */
 public final class Rybosome extends Organ
 {
-    public static final int WIDTH = 6;
-    public static final int HEIGHT = 6;
     private java.util.Iterator<Chromosome> genome;
     private Chromosome currentChromosome;
     private Gene currentGene;
     
+    public Rybosome(Cell cell, Organ parentOrgan, Size size, Shape shape){
+         super(cell,parentOrgan,size,shape);
+         createSelfImage();
+         updateImage(this.getRandomLocation(20));
+    }
+    
     public Rybosome(Cytosome cytosome) {
-        super(WIDTH,HEIGHT,OrganShape.TRIANGLE,cytosome);
+        this(cytosome.getCell(),cytosome,new Size(6,6),Shape.TRIANGLE );
         genome = getCell().getGenome().iterator();
-        createSelfImage();
-        updateImage(this.getRandomLocation(20));
     }
     
     @Override
@@ -40,17 +42,16 @@ public final class Rybosome extends Organ
             currentGene = currentChromosome.first;
         }
         
-        if(currentGene.isActive()) {
-            //Create a protein from the current Gene
-            Protein protein = currentGene.express();
-            //Is an Organ?
-            if(protein.getClass().isAssignableFrom(Organ.class)) {
-                
-            } else
-            //Is an Enzyme?
-            if(protein.getClass().isAssignableFrom(Enzyme.class)) {
-                
+        if(currentGene.isActive()) {  
+            //Create a protein from the current Gene 
+            Protein protein = null;
+            if(currentGene.getProteinToBuild().isAssignableFrom(Organ.class)) {
+                protein = currentGene.expressOrgan(this.getCell(), parentOrgan);
+            }else if(currentGene.getProteinToBuild().isAssignableFrom(Enzyme.class)) {
+                protein = currentGene.expressEnzyme();
             }
+            //this.getCell().
+            
         }
         //Updates the current gene
         currentGene = currentGene.next;

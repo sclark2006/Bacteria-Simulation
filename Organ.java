@@ -12,19 +12,18 @@ import java.util.Random;
 public abstract class Organ extends Protein
 {
     protected Organ parentOrgan;
-    protected int height;
-    protected int width;
-    protected OrganShape shape;
+    protected Size size;
+    protected Shape shape;
     protected Cell cell;
     protected List<Organ> children;
     private Random randomizer;
-    private Location location;
+    protected Location location;
     
-    public Organ(int width, int height, OrganShape shape, Organ parentOrgan, Cell cell) {
-        this.width = width;
-        this.height = height;
+    public Organ(Cell cell,Organ parentOrgan,Size size, Shape shape) {
+        this.size = size;
         this.shape = shape;
-        this.setImage(new GreenfootImage(width, height));
+        if(!shape.equals(Shape.IMAGE))
+            this.setImage(new GreenfootImage(size.getWidth(), size.getHeight()));
         this.parentOrgan = parentOrgan;
         this.children = new ArrayList<>();
         this.cell = cell;
@@ -38,11 +37,13 @@ public abstract class Organ extends Protein
         
     }
    
-    public Organ(int width, int height, OrganShape shape, Organ parentOrgan) {
-        this(width,height,shape,parentOrgan, parentOrgan.getCell());
+    public Organ(Organ parentOrgan,Size size, Shape shape) {
+        this(parentOrgan.getCell(),parentOrgan,size,shape);
     }
     
     protected void drawImage() {
+        int width = size.getWidth();
+        int height = size.getHeight();
         
         switch(this.shape) {
             case LINE:  this.getImage().drawLine(0, (int)(height/2),width,(int)(height/2));
@@ -57,6 +58,8 @@ public abstract class Organ extends Protein
     }
     
     protected void fillImage() {
+        int width = size.getWidth();
+        int height = size.getHeight();
         
         switch(this.shape) {
             case LINE:  this.getImage().drawLine(0, (int)(height/2),width,(int)(height/2));
@@ -70,7 +73,11 @@ public abstract class Organ extends Protein
         }
     }
     
-    protected void fillImage(int x, int y, int width, int height) {
+    protected void fillImage(Location location, Size size) {
+        int x = location.getX();
+        int y = location.getY();
+        int width = size.getWidth();
+        int height = size.getHeight();
         
         switch(this.shape) {
             case LINE:  this.getImage().drawLine(x, (int)(height/2),width,(int)(height/2));
@@ -89,22 +96,18 @@ public abstract class Organ extends Protein
     public void updateImage(Location selfLoc) 
     {
         this.location = selfLoc;
-        getImage().rotate(selfLoc.Rotation);
-        GreenfootImage image = new GreenfootImage(cell.getWidth(), cell.getHeight());
+        getImage().rotate(selfLoc.getRotation());
+        GreenfootImage image = new GreenfootImage(cell.getSize().getWidth(), cell.getSize().getHeight());
         image.drawImage(getCell().getImage(),0,0); //Draw the previous cell image
-        image.drawImage(this.getImage(), selfLoc.X, selfLoc.Y); //Draw the self image
+        image.drawImage(this.getImage(), selfLoc.getX(), selfLoc.getY()); //Draw the self image
         getCell().setImage(image); //Updates the cell image
     }
     
-    public int getHeight() {
-        return this.height;
+    public Size getSize() {
+        return this.size;
     }
     
-    public int getWidth() {
-        return this.width;
-    }
-    
-    public OrganShape getShape() {
+    public Shape getShape() {
         return this.shape;
     }
     
@@ -125,10 +128,10 @@ public abstract class Organ extends Protein
     }
     
     public Location getRandomLocation(int margin) {
-        int x = randomCoord(parentOrgan.getWidth(), this.width + margin);
-        int y = randomCoord(parentOrgan.getHeight(), this.height + margin);
-        int t = (int)randomizer.nextInt(359);
-        return new Location(x,y,t);
+        int x = randomCoord(parentOrgan.getSize().getWidth(), this.getSize().getWidth() + margin);
+        int y = randomCoord(parentOrgan.getSize().getHeight(), this.getSize().getHeight() + margin);
+        int r = (int)randomizer.nextInt(360);
+        return new Location(x,y,r);
     }
     
     
