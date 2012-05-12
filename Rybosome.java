@@ -50,7 +50,7 @@ public final class Rybosome extends Organ
             }else if(currentGene.getProteinToBuild().isAssignableFrom(Enzyme.class)) {
                 protein = currentGene.expressEnzyme();
             }
-            //this.getCell().
+            //parentOrgan
             
         }
         //Updates the current gene
