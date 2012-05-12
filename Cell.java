@@ -12,7 +12,7 @@ import java.util.Set;
  * @version May 04, 2012
  * 
  */
-public class Cell extends Actor
+public class Cell extends ProteinStructure
 {
     //public static final int WIDTH = 150;
     //public static final int HEIGHT = 90;
@@ -20,25 +20,30 @@ public class Cell extends Actor
     public static final Size SIZE = new Size(150,90);
     public Membrane membrane;
     public Cytosome cytosome;
-    private List<Organ> organelles;
+    private List<ProteinStructure> organelles;
     private Set<Chromosome> genome;
     private Size size;
+
+    public Cell(Cell cell, ProteinStructure parentOrgan, Size size, Shape shape) {
+        super(cell, parentOrgan, size, shape);
+    }
+  
     
     public Cell() {
-        super();
+       super(null, null, SIZE, Shape.CIRCLE);
         this.size = SIZE;
         this.membrane = new Membrane(this,null,size,Shape.CIRCLE);
         this.cytosome = new Cytosome(this.membrane);
         this.genome = initialGenome();
-        this.organelles = new ArrayList<Organ>();
+        this.organelles = new ArrayList<ProteinStructure>();
         this.organelles.add(new Rybosome(this.cytosome));
     }
     
     public Cell(Membrane membrane, Cytosome cytosome, Set<Chromosome> genome) {
-        super();
+        super(null, null, SIZE, Shape.CIRCLE);
         this.membrane = membrane;
         this.cytosome = cytosome;
-        this.organelles = new ArrayList<Organ>();
+        this.organelles = new ArrayList<ProteinStructure>();
         this.genome = genome;
     }
     
@@ -50,7 +55,7 @@ public class Cell extends Actor
         //this.getWorld().addObject(this.organelles.get(0), xpos, ypos);
     }
     
-    public List<Organ> getOrganelles() {
+    public List<ProteinStructure> getOrganelles() {
         return this.organelles;
     }
     
@@ -69,7 +74,7 @@ public class Cell extends Actor
     @Override
     public void act() 
     {
-         for(Organ organ : organelles) 
+         for(ProteinStructure organ : organelles) 
          {
              organ.act();
          }
@@ -88,5 +93,10 @@ public class Cell extends Actor
         
         initGenome.add(chromosome);
         return initGenome;
+    }
+
+    @Override
+    public void createSelfImage() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

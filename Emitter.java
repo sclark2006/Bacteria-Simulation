@@ -6,11 +6,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Frederick Clark 
  * @version May 2, 2012
  */
-public abstract class Emitter extends Organ
+public abstract class Emitter extends ProteinStructure
 {
     protected int maxLevel;
     
-    public Emitter(Cell cell, Organ parentOrgan, Size size, Shape shape, int maxLevel){
+    public Emitter(Cell cell, ProteinStructure parentOrgan, Size size, Shape shape, int maxLevel){
          super(cell, parentOrgan, size,shape);
           this.maxLevel = maxLevel;
     }

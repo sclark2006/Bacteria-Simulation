@@ -99,12 +99,12 @@ public final class Gene extends ExtensibleEnum<Gene> {
         return this.insertAfter(newGene);
     }
     
-    public <T extends Organ> T expressOrgan(Cell cell, Organ parentOrgan) {
+    public <T extends ProteinStructure> T expressOrgan(Cell cell, ProteinStructure parentOrgan) {
         try {
             Constructor ctor;
             T organ = null;
-            //Is an Organ?
-            if(proteinToBuild.isAssignableFrom(Organ.class)) {
+            //Is an ProteinStructure?
+            if(proteinToBuild.isAssignableFrom(ProteinStructure.class)) {
                 ctor = proteinToBuild.getConstructors()[0];
                 Object[] values = new Object[this.properties.length + 2];
                 values[0] = parentOrgan;

@@ -5,12 +5,12 @@
  * @author Frederick Clark 
  * @version May 2, 2012
  */
-public final class Chromosome extends Organ
+public final class Chromosome extends ProteinStructure
 {
     public Gene first;
     public Gene last;
 
-    public Chromosome(Cell cell, Organ parentOrgan,Size size, Shape shape ){
+    public Chromosome(Cell cell, ProteinStructure parentOrgan,Size size, Shape shape ){
          super( cell,parentOrgan,size,shape);
          createSelfImage();
          updateImage(this.getRandomLocation(20));

@@ -4,13 +4,13 @@
  * @author Frederick Clark 
  * @version May 5, 2012. Creation of the class
  */
-public final class Rybosome extends Organ
+public final class Rybosome extends ProteinStructure
 {
     private java.util.Iterator<Chromosome> genome;
     private Chromosome currentChromosome;
     private Gene currentGene;
     
-    public Rybosome(Cell cell, Organ parentOrgan, Size size, Shape shape){
+    public Rybosome(Cell cell, ProteinStructure parentOrgan, Size size, Shape shape){
          super(cell,parentOrgan,size,shape);
          createSelfImage();
          updateImage(this.getRandomLocation(20));
@@ -45,7 +45,7 @@ public final class Rybosome extends Organ
         if(currentGene.isActive()) {  
             //Create a protein from the current Gene 
             Protein protein = null;
-            if(currentGene.getProteinToBuild().isAssignableFrom(Organ.class)) {
+            if(currentGene.getProteinToBuild().isAssignableFrom(ProteinStructure.class)) {
                 protein = currentGene.expressOrgan(this.getCell(), parentOrgan);
             }else if(currentGene.getProteinToBuild().isAssignableFrom(Enzyme.class)) {
                 protein = currentGene.expressEnzyme();

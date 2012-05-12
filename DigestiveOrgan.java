@@ -5,9 +5,9 @@
  * @author Frederick Clark 
  * @version May 2, 2012
  */
-public final class DigestiveOrgan extends Organ
+public final class DigestiveOrgan extends ProteinStructure
 {
-     public DigestiveOrgan(Cell cell, Organ parentOrgan, Size size, Shape shape){
+     public DigestiveOrgan(Cell cell, ProteinStructure parentOrgan, Size size, Shape shape){
          super(cell,parentOrgan,size,shape);
          createSelfImage();
          updateImage(this.getRandomLocation(20));

@@ -5,11 +5,11 @@ import java.awt.Color;
  * @author Frederick Clark 
  * @version May 2, 2012
  */
-public final class Cytosome extends Organ
+public final class Cytosome extends ProteinStructure
 {
     public static final int TRANSPARENCY = 200;
     
-    public Cytosome(Cell cell,Organ parentOrgan, Size size, Shape shape ) {
+    public Cytosome(Cell cell,ProteinStructure parentOrgan, Size size, Shape shape ) {
         super(cell, parentOrgan,size,shape);
         createSelfImage(); 
         updateImage(parentOrgan.getLocation());

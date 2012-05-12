@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class LightPerceiver extends Perceiver
 {
-    public LightPerceiver(Cell cell, Organ parentOrgan, Size size, Shape shape, int minLevel, int maxLevel){
+    public LightPerceiver(Cell cell, ProteinStructure parentOrgan, Size size, Shape shape, int minLevel, int maxLevel){
      super(cell,parentOrgan,size,shape, minLevel, maxLevel);
     }
     

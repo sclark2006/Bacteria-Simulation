@@ -5,9 +5,9 @@
  * @author Frederick Clark
  * @version May 2, 2012
  */
-public final class MotionOrgan extends Organ
+public final class MotionOrgan extends ProteinStructure
 {
-     public MotionOrgan(Cell cell, Organ parentOrgan, Size size, Shape shape){
+     public MotionOrgan(Cell cell, ProteinStructure parentOrgan, Size size, Shape shape){
          super(cell,parentOrgan,size,shape);
         createSelfImage(); 
         updateImage(parentOrgan.getLocation());

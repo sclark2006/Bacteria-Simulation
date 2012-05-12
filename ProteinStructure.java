@@ -4,22 +4,22 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Write a description of class Organ here.
+ * Write a description of class ProteinStructure here.
  * 
  * @author Frederick Clark 
  * @version May 02, 2012
  */
-public abstract class Organ extends Protein
+public abstract class ProteinStructure extends Protein
 {
-    protected Organ parentOrgan;
+    protected ProteinStructure parentOrgan;
     protected Size size;
     protected Shape shape;
     protected Cell cell;
-    protected List<Organ> children;
+    protected List<ProteinStructure> children;
     private Random randomizer;
     protected Location location;
     
-    public Organ(Cell cell,Organ parentOrgan,Size size, Shape shape) {
+    public ProteinStructure(Cell cell,ProteinStructure parentOrgan,Size size, Shape shape) {
         this.size = size;
         this.shape = shape;
         if(!shape.equals(Shape.IMAGE))
@@ -37,7 +37,7 @@ public abstract class Organ extends Protein
         
     }
    
-    public Organ(Organ parentOrgan,Size size, Shape shape) {
+    public ProteinStructure(ProteinStructure parentOrgan,Size size, Shape shape) {
         this(parentOrgan.getCell(),parentOrgan,size,shape);
     }
     
@@ -111,11 +111,11 @@ public abstract class Organ extends Protein
         return this.shape;
     }
     
-    public Organ getParentOrgan() {
+    public ProteinStructure getParentOrgan() {
         return this.parentOrgan;
     }
     
-    public List<Organ> getChildren() {
+    public List<ProteinStructure> getChildren() {
         return this.children;
     }
     

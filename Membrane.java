@@ -6,9 +6,9 @@ import java.awt.Color;
  * @author Frederick Clark
  * @version May 2, 2012
  */
-public final class Membrane extends Organ
+public final class Membrane extends ProteinStructure
 {
-    public Membrane(Cell cell, Organ parentOrgan, Size size, Shape shape ){
+    public Membrane(Cell cell, ProteinStructure parentOrgan, Size size, Shape shape ){
          super(cell, parentOrgan, size,shape);
          createSelfImage();
          updateImage(new Location(0,0));
