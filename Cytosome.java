@@ -1,6 +1,8 @@
 import java.awt.Color;
+import java.util.PriorityQueue;
+import java.util.Queue;
 /**
- * Write a description of class Citosoma here.
+ * Write a description of class Cytosome here.
  * 
  * @author Frederick Clark 
  * @version May 2, 2012
@@ -8,15 +10,17 @@ import java.awt.Color;
 public final class Cytosome extends ProteinStructure
 {
     public static final int TRANSPARENCY = 200;
+    private Queue<Enzyme> enzymeQueue;
     
-    public Cytosome(Cell cell,ProteinStructure parentOrgan, Size size, Shape shape ) {
-        super(cell, parentOrgan,size,shape);
+    public Cytosome(Cell cell,Size size, Shape shape ) {
+        super(cell, size,shape);
         createSelfImage(); 
-        updateImage(parentOrgan.getLocation());
+        updateImage(parentStructure.getLocation());
+        enzymeQueue = new PriorityQueue<Enzyme>();
     }
     
     public Cytosome(Membrane membrane){
-        this(membrane.getCell(),membrane,membrane.getSize(),membrane.getShape());
+        this(membrane.getCell(),membrane.getSize(),membrane.getShape());
 
     }
    
@@ -31,9 +35,18 @@ public final class Cytosome extends ProteinStructure
      * Act - do whatever the Cytosome wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    @Override
+    @Override 
     public void act() 
     {
         // Add your action code here.
+        for(Enzyme enzyme : enzymeQueue) {
+            enzyme.act();
+        }
     }
+
+    public Queue<Enzyme> getEnzymeQueue() {
+        return enzymeQueue;
+    }
+    
+    
 }

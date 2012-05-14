@@ -7,8 +7,8 @@
  */
 public final class LightEmitter extends Emitter
 {
-    public LightEmitter(Cell cell, ProteinStructure parentOrgan, Size size, Shape shape, int maxLevel){
-         super(cell,parentOrgan,size,shape,maxLevel);
+    public LightEmitter(Cell cell, Size size, Shape shape, int maxLevel){
+         super(cell,size,shape,maxLevel);
          createSelfImage();
          updateImage(this.getRandomLocation(20));
     }

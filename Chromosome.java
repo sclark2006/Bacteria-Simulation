@@ -10,13 +10,13 @@ public final class Chromosome extends ProteinStructure
     public Gene first;
     public Gene last;
 
-    public Chromosome(Cell cell, ProteinStructure parentOrgan,Size size, Shape shape ){
-         super( cell,parentOrgan,size,shape);
+    public Chromosome(Cell cell, Size size, Shape shape ){
+         super( cell,size,shape);
          createSelfImage();
          updateImage(this.getRandomLocation(20));
     }
-    public Chromosome(Cytosome cytosome){
-        this(cytosome.getCell(),cytosome,new Size(30,30),Shape.IMAGE);
+    public Chromosome(ProteinStructure parentStructure){
+        this(parentStructure.getCell(),new Size(30,30),Shape.IMAGE);
     }
 
     @Override

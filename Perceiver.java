@@ -10,8 +10,8 @@ public abstract class Perceiver extends ProteinStructure
     protected int minLevel;
     protected int maxLevel;
     
-    public Perceiver(Cell cell, ProteinStructure parentOrgan, Size size, Shape shape, int minLevel, int maxLevel){
-     super(cell,parentOrgan,size,shape);
+    public Perceiver(Cell cell,Size size, Shape shape, int minLevel, int maxLevel){
+     super(cell,size,shape);
      this.minLevel = minLevel;
      this.maxLevel = maxLevel;
     }

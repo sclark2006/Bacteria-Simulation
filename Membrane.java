@@ -8,8 +8,8 @@ import java.awt.Color;
  */
 public final class Membrane extends ProteinStructure
 {
-    public Membrane(Cell cell, ProteinStructure parentOrgan, Size size, Shape shape ){
-         super(cell, parentOrgan, size,shape);
+    public Membrane(Cell cell, Size size, Shape shape ){
+         super(cell, size,shape);
          createSelfImage();
          updateImage(new Location(0,0));
     }

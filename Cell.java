@@ -1,8 +1,4 @@
-import greenfoot.Actor;
-import greenfoot.World;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -17,54 +13,26 @@ public class Cell extends ProteinStructure
     //public static final int WIDTH = 150;
     //public static final int HEIGHT = 90;
     
-    public static final Size SIZE = new Size(150,90);
+    private static final Size SIZE = new Size(150,90);
     public Membrane membrane;
     public Cytosome cytosome;
-    private List<ProteinStructure> organelles;
     private Set<Chromosome> genome;
-    private Size size;
 
-    public Cell(Cell cell, ProteinStructure parentOrgan, Size size, Shape shape) {
-        super(cell, parentOrgan, size, shape);
-    }
-  
-    
-    public Cell() {
-       super(null, null, SIZE, Shape.CIRCLE);
-        this.size = SIZE;
-        this.membrane = new Membrane(this,null,size,Shape.CIRCLE);
-        this.cytosome = new Cytosome(this.membrane);
-        this.genome = initialGenome();
-        this.organelles = new ArrayList<ProteinStructure>();
-        this.organelles.add(new Rybosome(this.cytosome));
+    public Cell(Size size, Shape shape) {
+        super(null, size, shape);
     }
     
-    public Cell(Membrane membrane, Cytosome cytosome, Set<Chromosome> genome) {
-        super(null, null, SIZE, Shape.CIRCLE);
-        this.membrane = membrane;
-        this.cytosome = cytosome;
-        this.organelles = new ArrayList<ProteinStructure>();
-        this.genome = genome;
+    public static Cell defaultInstance() {
+        Cell cell = new Cell(SIZE, Shape.CIRCLE);
+        cell.membrane = (Membrane) cell.addSubStructure(new Membrane(cell, SIZE, Shape.CIRCLE));
+        cell.cytosome = (Cytosome) cell.addSubStructure(new Cytosome(cell.membrane));
+        cell.genome = initialGenome(cell.cytosome);
+        cell.addSubStructure(new Rybosome(cell.cytosome));
+        return cell;
     }
-    
-    @Override
-    protected void addedToWorld(World world) {
-        //System.out.println("Added Cell to the world " + world.toString());
-        //int xpos = getX() + (int)(width / 2);
-        //int ypos = getY() + (int)(height / 2);
-        //this.getWorld().addObject(this.organelles.get(0), xpos, ypos);
-    }
-    
-    public List<ProteinStructure> getOrganelles() {
-        return this.organelles;
-    }
-    
+        
     public Set<Chromosome> getGenome() {
         return this.genome;
-    }
- 
-    public Size getSize() {
-        return size;
     }
  
     /**
@@ -74,29 +42,28 @@ public class Cell extends ProteinStructure
     @Override
     public void act() 
     {
-         for(ProteinStructure organ : organelles) 
+         for(ProteinStructure organ : getSubStructures()) 
          {
              organ.act();
          }
     }
     
-    private Set<Chromosome> initialGenome() {
+    private static Set<Chromosome> initialGenome(ProteinStructure parent) {
         //Creates a Set to store the chromosome created
         Set<Chromosome> initGenome = new HashSet<Chromosome>();
-        Chromosome chromosome = new Chromosome(this.cytosome);
+        Chromosome chromosome = new Chromosome(parent);
         //fill the chromosome with the needed genes
-        chromosome.add(Gene.BuildOrganBuilderStopper).
-                   add(Gene.BuildRybosome).
-                   add(Gene.BuildMotionOrgan).
-                   add(Gene.BuildLightPerceiver); 
+        chromosome.add(Gene.BuildDuplicationStarter).
+                   add(Gene.BuildChromosomeClonner).
+                   add(Gene.BuildDuplicationStopper); 
                     
-        
+        chromosome.setParentStructure(parent);
         initGenome.add(chromosome);
         return initGenome;
     }
 
     @Override
     public void createSelfImage() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //throw new UnsupportedOperationException("Not supported yet.");
     }
 }

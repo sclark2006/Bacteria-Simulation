@@ -10,8 +10,8 @@ public abstract class Emitter extends ProteinStructure
 {
     protected int maxLevel;
     
-    public Emitter(Cell cell, ProteinStructure parentOrgan, Size size, Shape shape, int maxLevel){
-         super(cell, parentOrgan, size,shape);
+    public Emitter(Cell cell, Size size, Shape shape, int maxLevel){
+         super(cell, size,shape);
           this.maxLevel = maxLevel;
     }
 

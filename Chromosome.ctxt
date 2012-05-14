@@ -1,5 +1,5 @@
 #BlueJ class context
-comment0.params=parentOrgan
+comment0.params=parentStructure
 comment0.target=Chromosome(Organ)
 comment1.params=
 comment1.target=void\ createSelfImage()

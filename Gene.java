@@ -18,7 +18,8 @@ public final class Gene extends ExtensibleEnum<Gene> {
     BuildRybosome = newGene(Rybosome.class,new Size(6,6), Shape.TRIANGLE),
     BuildLightPerceiver = newGene(LightPerceiver.class, new Size(16,10),Shape.CIRCLE),
     BuildLightEmitter = newGene(LightEmitter.class, new Size(16,10), Shape.CIRCLE),
-    
+    BuildCellWhall = newGene(CellWall.class, null, Shape.CIRCLE),
+            
     BuildOrganBuilderStopper = newGene(OrganBuilderStopper.class, 10),
     BuildMembraneDestroyer = newGene(MembraneDestroyer.class,0),
     BuildMembraneDivider = newGene(MembraneDivider.class,0),
@@ -99,7 +100,7 @@ public final class Gene extends ExtensibleEnum<Gene> {
         return this.insertAfter(newGene);
     }
     
-    public <T extends ProteinStructure> T expressOrgan(Cell cell, ProteinStructure parentOrgan) {
+    public <T extends ProteinStructure> T expressOrgan(Cell cell, ProteinStructure parentStructure) {
         try {
             Constructor ctor;
             T organ = null;
@@ -107,7 +108,7 @@ public final class Gene extends ExtensibleEnum<Gene> {
             if(proteinToBuild.isAssignableFrom(ProteinStructure.class)) {
                 ctor = proteinToBuild.getConstructors()[0];
                 Object[] values = new Object[this.properties.length + 2];
-                values[0] = parentOrgan;
+                values[0] = parentStructure;
                 values[1] = cell;
                 for(int i=2; i < values.length; i++)
                     values[i] = this.properties[i-2];

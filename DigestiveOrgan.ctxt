@@ -1,5 +1,5 @@
 #BlueJ class context
-comment0.params=width\ height\ shape\ parentOrgan
+comment0.params=width\ height\ shape\ parentStructure
 comment0.target=DigestiveOrgan(int,\ int,\ OrganShape,\ Organ)
 comment1.params=
 comment1.target=void\ createSelfImage()

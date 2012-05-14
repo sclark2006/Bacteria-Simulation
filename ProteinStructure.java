@@ -10,36 +10,37 @@ import java.util.Random;
  * @version May 02, 2012
  */
 public abstract class ProteinStructure extends Protein
-{
-    protected ProteinStructure parentOrgan;
+{ 
+    private List<ProteinStructure> subStructures;
+    
+    protected ProteinStructure parentStructure;
     protected Size size;
     protected Shape shape;
-    protected Cell cell;
-    protected List<ProteinStructure> children;
+    protected Cell cell;    
     private Random randomizer;
     protected Location location;
     
-    public ProteinStructure(Cell cell,ProteinStructure parentOrgan,Size size, Shape shape) {
+    public ProteinStructure(Cell cell,Size size, Shape shape) {
         this.size = size;
         this.shape = shape;
         if(!shape.equals(Shape.IMAGE))
             this.setImage(new GreenfootImage(size.getWidth(), size.getHeight()));
-        this.parentOrgan = parentOrgan;
-        this.children = new ArrayList<>();
+        this.subStructures = new ArrayList<ProteinStructure>();
         this.cell = cell;
-        if(parentOrgan != null)
-            this.parentOrgan.getChildren().add(this);
+        //if(parentStructure != null)
+        //    this.parentStructure.getSubStructures().add(this);
 
+        //Add the actor to the world        
         randomizer = WaterEnvironment.getRandomizer();
-        //Add the actor to the world
-        //if(this.parentOrgan != null)
-        //    this.getWorld().addObject(this,parentOrgan.getX(),parentOrgan.getY());
+
+        //if(this.parentStructure != null)
+        //    this.getWorld().addObject(this,parentStructure.getX(),parentStructure.getY());
         
     }
-   
-    public ProteinStructure(ProteinStructure parentOrgan,Size size, Shape shape) {
-        this(parentOrgan.getCell(),parentOrgan,size,shape);
-    }
+  
+    /*public ProteinStructure(ProteinStructure parentStructure,Size size, Shape shape) {
+        this(parentStructure.getCell(),parentStructure,size,shape);
+    }*/
     
     protected void drawImage() {
         int width = size.getWidth();
@@ -93,6 +94,28 @@ public abstract class ProteinStructure extends Protein
    
     public abstract void createSelfImage();
    
+    public void setParentStructure(ProteinStructure parentStructure) {
+        if(parentStructure != null)
+            parentStructure.subStructures.add(this);
+        else if(this.parentStructure != null)
+            this.parentStructure.subStructures.remove(this);
+        this.parentStructure = parentStructure;
+    }
+    
+    public ProteinStructure addSubStructure(ProteinStructure child) {
+        if(child != null) {
+            child.parentStructure = this;
+            this.subStructures.add(child);
+        }
+        return child;
+    }
+    
+    public ProteinStructure removeSubStructure(ProteinStructure child) {
+        if(child != null)
+            child.setParentStructure(null);
+        return child;
+    }
+    
     public void updateImage(Location selfLoc) 
     {
         this.location = selfLoc;
@@ -111,12 +134,12 @@ public abstract class ProteinStructure extends Protein
         return this.shape;
     }
     
-    public ProteinStructure getParentOrgan() {
-        return this.parentOrgan;
+    public ProteinStructure getParentStructure() {
+        return this.parentStructure;
     }
     
-    public List<ProteinStructure> getChildren() {
-        return this.children;
+    public List<ProteinStructure> getSubStructures() {
+        return this.subStructures;
     }
     
     public Cell getCell() {
@@ -128,8 +151,11 @@ public abstract class ProteinStructure extends Protein
     }
     
     public Location getRandomLocation(int margin) {
-        int x = randomCoord(parentOrgan.getSize().getWidth(), this.getSize().getWidth() + margin);
-        int y = randomCoord(parentOrgan.getSize().getHeight(), this.getSize().getHeight() + margin);
+        int parentWidth = parentStructure == null ? parentStructure.getSize().getWidth() : cell.getSize().getWidth();
+        int parentHeight = parentStructure == null ? parentStructure.getSize().getHeight() : cell.getSize().getHeight();
+        
+        int x = randomCoord(parentWidth, this.getSize().getWidth() + margin);
+        int y = randomCoord(parentHeight, this.getSize().getHeight() + margin);
         int r = (int)randomizer.nextInt(360);
         return new Location(x,y,r);
     }

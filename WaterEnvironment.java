@@ -22,7 +22,7 @@ public class WaterEnvironment extends World
         super(WIDTH, HEIGHT, 1); 
         setBackground("water3.jpg");
         //setPaintOrder(Cell.class);
-        addObject(new Cell(), WIDTH /2, HEIGHT /2);
+        addObject(Cell.defaultInstance(), WIDTH /2, HEIGHT /2);
     }
     
     public static Random getRandomizer()

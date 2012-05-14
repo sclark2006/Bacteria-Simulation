@@ -7,8 +7,8 @@
  */
 public final class DigestiveOrgan extends ProteinStructure
 {
-     public DigestiveOrgan(Cell cell, ProteinStructure parentOrgan, Size size, Shape shape){
-         super(cell,parentOrgan,size,shape);
+     public DigestiveOrgan(Cell cell, ProteinStructure parentStructure, Size size, Shape shape){
+         super(cell,size,shape);
          createSelfImage();
          updateImage(this.getRandomLocation(20));
     }
