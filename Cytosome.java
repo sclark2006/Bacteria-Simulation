@@ -7,21 +7,20 @@ import java.util.Queue;
  * @author Frederick Clark 
  * @version May 2, 2012
  */
-public final class Cytosome extends ProteinStructure
+public final class Cytosome extends Soma
 {
     public static final int TRANSPARENCY = 200;
     private Queue<Enzyme> enzymeQueue;
     
-    public Cytosome(Cell cell,Size size, Shape shape ) {
-        super(cell, size,shape);
+    public Cytosome(Cell cell,Shape shape ) {
+        super(cell, shape);
         createSelfImage(); 
-        updateImage(parentStructure.getLocation());
+        updateImage(cell.getLocation());
         enzymeQueue = new PriorityQueue<Enzyme>();
     }
     
     public Cytosome(Membrane membrane){
-        this(membrane.getCell(),membrane.getSize(),membrane.getShape());
-
+        this(membrane.getCell(),membrane.getShape());
     }
    
     @Override
@@ -38,10 +37,8 @@ public final class Cytosome extends ProteinStructure
     @Override 
     public void act() 
     {
-        // Add your action code here.
-        for(Enzyme enzyme : enzymeQueue) {
-            enzyme.act();
-        }
+        Enzyme enzyme = enzymeQueue.poll();
+        enzyme.act();
     }
 
     public Queue<Enzyme> getEnzymeQueue() {

@@ -10,12 +10,8 @@ import java.util.Set;
  */
 public class Cell extends ProteinStructure
 {
-    //public static final int WIDTH = 150;
-    //public static final int HEIGHT = 90;
-    
-    private static final Size SIZE = new Size(150,90);
-    public Membrane membrane;
-    public Cytosome cytosome;
+    public Envelope envelope;
+    public Cytosome soma;
     private Set<Chromosome> genome;
 
     public Cell(Size size, Shape shape) {
@@ -23,11 +19,11 @@ public class Cell extends ProteinStructure
     }
     
     public static Cell defaultInstance() {
-        Cell cell = new Cell(SIZE, Shape.CIRCLE);
-        cell.membrane = (Membrane) cell.addSubStructure(new Membrane(cell, SIZE, Shape.CIRCLE));
-        cell.cytosome = (Cytosome) cell.addSubStructure(new Cytosome(cell.membrane));
-        cell.genome = initialGenome(cell.cytosome);
-        cell.addSubStructure(new Rybosome(cell.cytosome));
+        Cell cell = new Cell(new Size(150,90), Shape.CIRCLE);
+        cell.envelope =  (Envelope) cell.addSubStructure(new Membrane(cell, Shape.CIRCLE));
+        cell.soma = (Cytosome) cell.addSubStructure(new Cytosome((Membrane)cell.envelope));
+        cell.genome = Cell.initialGenome(cell.soma);
+        cell.addSubStructure(new Rybosome(cell.soma));
         return cell;
     }
         

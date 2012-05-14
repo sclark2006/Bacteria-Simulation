@@ -93,26 +93,33 @@ public abstract class ProteinStructure extends Protein
     }
    
     public abstract void createSelfImage();
+    public void addedToParent() {}
+    public void removedFromParent(){}
    
     public void setParentStructure(ProteinStructure parentStructure) {
-        if(parentStructure != null)
+        if(parentStructure != null) {
             parentStructure.subStructures.add(this);
-        else if(this.parentStructure != null)
+            this.addedToParent();
+        }
+        else if(this.parentStructure != null) {
             this.parentStructure.subStructures.remove(this);
+            this.removedFromParent();
+            
+        }
         this.parentStructure = parentStructure;
     }
     
     public ProteinStructure addSubStructure(ProteinStructure child) {
         if(child != null) {
-            child.parentStructure = this;
-            this.subStructures.add(child);
+            child.setParentStructure(this);
         }
         return child;
     }
     
     public ProteinStructure removeSubStructure(ProteinStructure child) {
-        if(child != null)
-            child.setParentStructure(null);
+        if(child != null) {
+            child.setParentStructure(null);            
+        }
         return child;
     }
     

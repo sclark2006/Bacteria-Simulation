@@ -44,13 +44,11 @@ public final class Rybosome extends ProteinStructure
         
         if(currentGene.isActive()) {  
             //Create a protein from the current Gene 
-            Protein protein = null;
             if(currentGene.getProteinToBuild().isAssignableFrom(ProteinStructure.class)) {
-                protein = currentGene.expressOrgan(this.getCell(), parentStructure);
+                 parentStructure.addSubStructure(currentGene.expressOrgan(this.getCell()));
             }else if(currentGene.getProteinToBuild().isAssignableFrom(Enzyme.class)) {
-                protein = currentGene.expressEnzyme();
                 if(parentStructure.getClass().equals(Cytosome.class))
-                    ((Cytosome)parentStructure).getEnzymeQueue().add((Enzyme)protein);
+                    ((Cytosome)parentStructure).getEnzymeQueue().add(currentGene.expressEnzyme());
             }
             //parentStructure
             

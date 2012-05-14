@@ -6,10 +6,10 @@ import java.awt.Color;
  * @author Frederick Clark
  * @version May 2, 2012
  */
-public final class Membrane extends ProteinStructure
+public final class Membrane extends Envelope
 {
-    public Membrane(Cell cell, Size size, Shape shape ){
-         super(cell, size,shape);
+    public Membrane(Cell cell, Shape shape ){
+         super(cell, shape);
          createSelfImage();
          updateImage(new Location(0,0));
     }

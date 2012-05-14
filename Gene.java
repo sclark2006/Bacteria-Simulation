@@ -13,8 +13,8 @@ public final class Gene extends ExtensibleEnum<Gene> {
             
     BuildMotionOrgan = newGene(MotionOrgan.class, new Size(10,30), Shape.LINE), 
     BuildDigestiveOrgan =newGene(DigestiveOrgan.class, new Size(30,30), Shape.CIRCLE),
-    BuildMembrane = newGene(Membrane.class, null, Shape.CIRCLE),
-    BuildCytosome = newGene(Cytosome.class,null,Shape.CIRCLE),
+    BuildMembrane = newGene(Membrane.class, Shape.CIRCLE),
+    BuildCytosome = newGene(Cytosome.class, Shape.CIRCLE),
     BuildRybosome = newGene(Rybosome.class,new Size(6,6), Shape.TRIANGLE),
     BuildLightPerceiver = newGene(LightPerceiver.class, new Size(16,10),Shape.CIRCLE),
     BuildLightEmitter = newGene(LightEmitter.class, new Size(16,10), Shape.CIRCLE),
@@ -100,18 +100,17 @@ public final class Gene extends ExtensibleEnum<Gene> {
         return this.insertAfter(newGene);
     }
     
-    public <T extends ProteinStructure> T expressOrgan(Cell cell, ProteinStructure parentStructure) {
+    public <T extends ProteinStructure> T expressOrgan(Cell cell) {
         try {
             Constructor ctor;
             T organ = null;
             //Is an ProteinStructure?
             if(proteinToBuild.isAssignableFrom(ProteinStructure.class)) {
                 ctor = proteinToBuild.getConstructors()[0];
-                Object[] values = new Object[this.properties.length + 2];
-                values[0] = parentStructure;
-                values[1] = cell;
-                for(int i=2; i < values.length; i++)
-                    values[i] = this.properties[i-2];
+                Object[] values = new Object[this.properties.length + 1];
+                values[0] = cell;
+                for(int i=1; i < values.length; i++)
+                    values[i] = this.properties[i-1];
                 organ = (T)ctor.newInstance(this.properties);   
             }
             
