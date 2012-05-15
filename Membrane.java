@@ -29,5 +29,11 @@ public final class Membrane extends Envelope
     public void act() 
     {
         // Add your action code here.
-    }    
+    }
+
+    @Override
+    public Class<? extends ProteinStructure> getParentType() {
+        
+        return CellWall.class;
+    }
 }

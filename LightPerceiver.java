@@ -21,4 +21,9 @@ public class LightPerceiver extends Perceiver
     @Override
     public void perceive() {
     }
+
+    @Override
+    public Class<? extends ProteinStructure> getParentType() {
+        return Cytosome.class;
+    }
 }

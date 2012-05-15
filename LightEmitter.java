@@ -19,5 +19,10 @@ public final class LightEmitter extends Emitter
     }
     @Override
     public void emit() {
-    } 
+    }
+
+    @Override
+    public Class<? extends ProteinStructure> getParentType() {
+        return Cytosome.class;
+    }
 }

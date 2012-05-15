@@ -37,12 +37,22 @@ public final class Cytosome extends Soma
     @Override 
     public void act() 
     {
-        Enzyme enzyme = enzymeQueue.poll();
-        enzyme.act();
+        Enzyme enzyme = enzymeQueue.peek();
+        if(enzyme != null) {
+            if(enzyme.isActive())
+                enzyme.act();
+            else
+                enzymeQueue.poll();
+        }
     }
 
     public Queue<Enzyme> getEnzymeQueue() {
         return enzymeQueue;
+    }
+
+    @Override
+    public Class<? extends ProteinStructure> getParentType() {
+        return Membrane.class;
     }
     
     

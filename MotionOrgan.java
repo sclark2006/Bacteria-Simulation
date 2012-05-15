@@ -23,5 +23,10 @@ public final class MotionOrgan extends ProteinStructure
     public void act() 
     {
         // Add your action code here.
-    }    
+    }
+
+    @Override
+    public Class<? extends ProteinStructure> getParentType() {
+        return Envelope.class;
+    }
 }

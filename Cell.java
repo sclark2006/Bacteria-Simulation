@@ -11,7 +11,7 @@ import java.util.Set;
 public class Cell extends ProteinStructure
 {
     public Envelope envelope;
-    public Cytosome soma;
+    public Soma soma;
     private Set<Chromosome> genome;
 
     public Cell(Size size, Shape shape) {
@@ -23,10 +23,19 @@ public class Cell extends ProteinStructure
         cell.envelope =  (Envelope) cell.addSubStructure(new Membrane(cell, Shape.CIRCLE));
         cell.soma = (Cytosome) cell.addSubStructure(new Cytosome((Membrane)cell.envelope));
         cell.genome = Cell.initialGenome(cell.soma);
-        cell.addSubStructure(new Rybosome(cell.soma));
+        cell.addSubStructure(new Rybosome((Cytosome)cell.soma));
         return cell;
     }
+
+    public Envelope getEnvelope() {
+        return envelope;
+    }
+
+    public Soma getSoma() {
+        return soma;
+    }
         
+    
     public Set<Chromosome> getGenome() {
         return this.genome;
     }
@@ -61,5 +70,10 @@ public class Cell extends ProteinStructure
     @Override
     public void createSelfImage() {
         //throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Class<? extends ProteinStructure> getParentType() {
+        return Cell.class;
     }
 }

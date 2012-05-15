@@ -10,10 +10,10 @@ import java.awt.Color;
  *
  * @author frederick.clark
  */
-public final class CellWall extends ProteinStructure
+public final class CellWall extends Envelope
 {
-    public CellWall(Cell cell, Size size, Shape shape ){
-         super(cell,size,shape);
+    public CellWall(Cell cell, Shape shape ){
+         super(cell,shape);
          createSelfImage();
          updateImage(new Location(0,0));
     }
@@ -23,6 +23,11 @@ public final class CellWall extends ProteinStructure
         this.cell.getImage().clear();
         this.getImage().setColor(Color.GREEN );
         super.drawImage();
+    }
+
+    @Override
+    public Class<? extends ProteinStructure> getParentType() {
+        return Cell.class;
     }
     
 }

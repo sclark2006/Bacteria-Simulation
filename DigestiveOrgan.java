@@ -26,5 +26,10 @@ public final class DigestiveOrgan extends ProteinStructure
     public void act() 
     {
         // Add your action code here.
-    }    
+    }
+
+    @Override
+    public Class<? extends ProteinStructure> getParentType() {
+        return Cytosome.class;
+    }
 }

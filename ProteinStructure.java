@@ -93,6 +93,7 @@ public abstract class ProteinStructure extends Protein
     }
    
     public abstract void createSelfImage();
+    public abstract Class<? extends ProteinStructure> getParentType();
     public void addedToParent() {}
     public void removedFromParent(){}
    
@@ -165,6 +166,23 @@ public abstract class ProteinStructure extends Protein
         int y = randomCoord(parentHeight, this.getSize().getHeight() + margin);
         int r = (int)randomizer.nextInt(360);
         return new Location(x,y,r);
+    }
+    
+    public ProteinStructure getSubStructureByType(Class<? extends ProteinStructure> parentType) {
+        ProteinStructure result = null;
+        for(ProteinStructure structure :this.subStructures)
+        {
+            if(structure.getClass().isAssignableFrom(parentType))
+            {
+                result = structure;
+                break;
+            }
+        }
+        if(result == null)
+            result = this.getCell();
+        
+        return result;
+            
     }
     
     

@@ -20,7 +20,7 @@ public final class Rybosome extends ProteinStructure
         this(cytosome.getCell(),new Size(6,6),Shape.CIRCLE );
         genome = getCell().getGenome().iterator();
     }
-    
+       
     @Override
     public void createSelfImage() {
         this.getImage().setColor(java.awt.Color.CYAN );
@@ -43,17 +43,24 @@ public final class Rybosome extends ProteinStructure
         }
         
         if(currentGene.isActive()) {  
-            //Create a protein from the current Gene 
+            //Create a protein from the current Gene             
             if(currentGene.getProteinToBuild().isAssignableFrom(ProteinStructure.class)) {
-                 parentStructure.addSubStructure(currentGene.expressOrgan(this.getCell()));
+                ProteinStructure structure = currentGene.expressOrgan(this.getCell());
+                ProteinStructure parent = this.getCell().getSubStructureByType(structure.getParentType());
+                 parent.addSubStructure(structure);
             }else if(currentGene.getProteinToBuild().isAssignableFrom(Enzyme.class)) {
-                if(parentStructure.getClass().equals(Cytosome.class))
-                    ((Cytosome)parentStructure).getEnzymeQueue().add(currentGene.expressEnzyme());
+                ((Cytosome)this.parentStructure).getEnzymeQueue().add(currentGene.expressEnzyme());
             }
             //parentStructure
             
         }
         //Updates the current gene
         currentGene = currentGene.next;
-    }    
+    }
+
+    @Override
+    public Class<? extends ProteinStructure> getParentType() {
+        return Cytosome.class;
+    }
+
 }

@@ -79,5 +79,11 @@ public final class Chromosome extends ProteinStructure
     }
     
     public void mutate() {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    @Override
+    public Class<? extends ProteinStructure> getParentType() {
+        return Soma.class;
     }
 }
