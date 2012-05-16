@@ -94,7 +94,10 @@ public abstract class ProteinStructure extends Protein
    
     public abstract void createSelfImage();
     public abstract Class<? extends ProteinStructure> getParentType();
-    public void onAddedToParent() {}
+    public void onAddedToParent() {
+        this.location = parentStructure.getLocation();
+        updateImage();
+    }
     public void onRemovedFromParent(){}
    
     public void setParentStructure(ProteinStructure parentStructure) {
