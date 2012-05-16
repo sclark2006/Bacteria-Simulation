@@ -1,10 +1,10 @@
 #BlueJ class context
 comment0.params=cell\ size\ shape
 comment0.target=Rybosome(Cell,\ Size,\ Shape)
-comment1.params=cytosome
-comment1.target=Rybosome(Cytosome)
+comment1.params=
+comment1.target=void\ createSelfImage()
 comment2.params=
-comment2.target=void\ createSelfImage()
+comment2.target=void\ onAddedToParent()
 comment3.params=
 comment3.target=void\ act()
 comment3.text=\r\n\ Act\ -\ do\ whatever\ the\ Rybosome\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n

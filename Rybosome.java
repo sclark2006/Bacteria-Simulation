@@ -13,14 +13,9 @@ public final class Rybosome extends ProteinStructure
     public Rybosome(Cell cell, Size size, Shape shape){
          super(cell,size,shape);
          createSelfImage();
-         this.location = this.randomLocation(20);
-         updateImage();
+         genome = getCell().getGenome().iterator();
     }
     
-    public Rybosome(Cytosome cytosome) {
-        this(cytosome.getCell(),new Size(6,6),Shape.CIRCLE );
-        genome = getCell().getGenome().iterator();
-    }
        
     @Override
     public void createSelfImage() {
@@ -28,6 +23,11 @@ public final class Rybosome extends ProteinStructure
         super.fillImage();
     }
     
+   @Override
+    public void onAddedToParent() {
+        this.location = this.randomLocation(20);
+         updateImage();
+    }
     /**
      * Act - do whatever the Rybosome wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.

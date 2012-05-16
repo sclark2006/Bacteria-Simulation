@@ -16,15 +16,8 @@ public final class Membrane extends Envelope {
 
     @Override
     public void createSelfImage() {
-        this.cell.getImage().clear();
         this.getImage().setColor(Color.GREEN);
         super.drawImage();
-    }
-
-    @Override
-    public void onAddedToParent() {
-        this.location = parentStructure.getLocation();        
-        updateImage();
     }
 
     /**

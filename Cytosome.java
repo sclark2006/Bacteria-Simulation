@@ -22,14 +22,11 @@ public final class Cytosome extends Soma
    
     @Override
     public void createSelfImage() {
-        this.location = cell.getLocation();
-        this.size = cell.getSize();
         this.getImage().setColor(Color.WHITE );
         this.getImage().setTransparency(TRANSPARENCY);
-        //this.fillImage(this.location, this.size);
         this.fillImage();
     }
-    
+        
     /**
      * Act - do whatever the Cytosome wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.

@@ -15,13 +15,10 @@ public final class CellWall extends Envelope
     public CellWall(Cell cell){
          super(cell);
          createSelfImage();
-         this.location = new Location(0,0);
-         updateImage();
     }
     
     @Override
     public void createSelfImage() {
-        this.cell.getImage().clear();
         this.getImage().setColor(Color.GREEN );
         super.drawImage();
     }

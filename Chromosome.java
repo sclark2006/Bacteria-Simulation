@@ -20,6 +20,7 @@ public final class Chromosome extends ProteinStructure
         this.location = this.randomLocation(20);
          updateImage();
     }
+    
     @Override
     public void createSelfImage() {
         setImage("chromosome1.gif");

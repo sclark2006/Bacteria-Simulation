@@ -16,6 +16,12 @@ public abstract class Perceiver extends ProteinStructure
      this.maxLevel = maxLevel;
     }
     
+    @Override
+    public void onAddedToParent() {
+        this.location = this.randomLocation(20);
+         updateImage();
+    }
+       
     public int getMinLevel() {
         return minLevel;
     }

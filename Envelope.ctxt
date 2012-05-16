@@ -1,4 +1,4 @@
 #BlueJ class context
-comment0.params=cell\ shape
-comment0.target=Envelope(Cell,\ Shape)
+comment0.params=cell
+comment0.target=Envelope(Cell)
 numComments=1
