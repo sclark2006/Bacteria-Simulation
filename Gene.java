@@ -15,7 +15,7 @@ public final class Gene extends ExtensibleEnum<Gene> {
     BuildDigestiveOrgan =newGene(DigestiveOrgan.class, new Size(30,30), Shape.CIRCLE),
     BuildMembrane = newGene(Membrane.class, Shape.CIRCLE),
     BuildCytosome = newGene(Cytosome.class, Shape.CIRCLE),
-    BuildRybosome = newGene(Rybosome.class,new Size(6,6), Shape.TRIANGLE),
+    BuildRybosome = newGene(Rybosome.class,new Size(6,6), Shape.CIRCLE),
     BuildLightPerceiver = newGene(LightPerceiver.class, new Size(16,10),Shape.CIRCLE),
     BuildLightEmitter = newGene(LightEmitter.class, new Size(16,10), Shape.CIRCLE),
     BuildCellWhall = newGene(CellWall.class, null, Shape.CIRCLE),
@@ -100,24 +100,32 @@ public final class Gene extends ExtensibleEnum<Gene> {
         return this.insertAfter(newGene);
     }
     
-    public <T extends ProteinStructure> T expressOrgan(Cell cell) {
+    public <T extends ProteinStructure> T expressStructure(Cell cell) {
         try {
             Constructor ctor;
-            T organ = null;
+            T structure = null;
             //Is an ProteinStructure?
-            if(proteinToBuild.isAssignableFrom(ProteinStructure.class)) {
+            if(ProteinStructure.class.isAssignableFrom(proteinToBuild)) {
                 ctor = proteinToBuild.getConstructors()[0];
                 Object[] values = new Object[this.properties.length + 1];
                 values[0] = cell;
                 for(int i=1; i < values.length; i++)
                     values[i] = this.properties[i-1];
-                organ = (T)ctor.newInstance(this.properties);   
+                //System.out.println(Arrays.toString(values));
+                structure = (T)ctor.newInstance(values); 
+                //System.out.println("Created the instance of "+structure);
             }
+            else
+                System.out.println(ProteinStructure.class +"  is not assignable from "+proteinToBuild);
             
-            return organ;
+            return structure;
         }
         //catch(NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+        catch(IllegalArgumentException iae) {
+            throw iae;
+        }
         catch(Exception e) {
+            System.out.println("An exception happend when trying to initialize the structure. " +e.toString());
             return null;
             //throw new IllegalArgumentException("The class "+enumType.getSimpleName() + " doesn't inherits " + ExtensibleEnum.class.getSimpleName());
         } 
@@ -128,15 +136,22 @@ public final class Gene extends ExtensibleEnum<Gene> {
             Constructor ctor;
             T enzyme = null;
             //Is an Enzyme?
-            if(proteinToBuild.isAssignableFrom(Enzyme.class)) {
+            if(Enzyme.class.isAssignableFrom(proteinToBuild)) {
                 ctor = proteinToBuild.getConstructors()[0];
                 enzyme = (T)ctor.newInstance(this.properties);
-            }
+            }else
+                System.out.println(Enzyme.class +"  is not assignable from "+proteinToBuild);
+            
+                
             
             return enzyme;
         }
         //catch(NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+        catch(IllegalArgumentException iae) {
+            throw iae;
+        }
         catch(Exception e) {
+            System.out.println("An exception happend when trying to initialize the Enzyme. " +e.toString());
             return null;
             //throw new IllegalArgumentException("The class "+enumType.getSimpleName() + " doesn't inherits " + ExtensibleEnum.class.getSimpleName());
         } 
