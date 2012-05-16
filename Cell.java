@@ -28,7 +28,7 @@ public class Cell extends ProteinStructure
         
         Cell cell = Gene.BuildCellSpace.expressStructure(null);
         cell.envelope =  (Envelope) cell.addSubStructure(Gene.BuildMembrane.expressStructure(cell));
-        cell.soma = (Cytosome) cell.addSubStructure(Gene.BuildCytosome.expressStructure(cell) );
+        cell.soma = (Cytosome) cell.addSubStructure(Gene.BuildCytosome.expressStructure(cell));
         cell.genome = Cell.initialGenome(cell.soma);
         cell.addSubStructure(Gene.BuildRybosome.expressStructure(cell) );
         cell.addSubStructure(Gene.BuildMotionStructure.expressStructure(cell) );
@@ -62,16 +62,15 @@ public class Cell extends ProteinStructure
          }
     }
     
-    private static Set<Chromosome> initialGenome(ProteinStructure parent) {
+    private static Set<Chromosome> initialGenome(Soma parent) {
         //Creates a Set to store the chromosome created
         Set<Chromosome> initGenome = new HashSet<Chromosome>();
-        Chromosome chromosome = new Chromosome(parent);
+        Chromosome chromosome = Gene.BuildChromosome.expressStructure(parent.getCell()); //new Chromosome(parent);
         //fill the chromosome with the needed genes
         chromosome.add(Gene.BuildMotionStarter);
                    //add(Gene.BuildChromosomeClonner).
                    //add(Gene.BuildDuplicationStopper); 
-                    
-        chromosome.setParentStructure(parent);
+        parent.addSubStructure(chromosome);        
         initGenome.add(chromosome);
         return initGenome;
     }

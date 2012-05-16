@@ -7,7 +7,13 @@
  */
 public abstract class Soma extends ProteinStructure
 {
-    public Soma(Cell cell, Shape shape ){
-         super(cell, cell.getSize(), shape);
+    public Soma(Cell cell){
+         super(cell, cell.getSize(), cell.getShape());
+    }
+    
+    @Override
+    public void onAddedToParent() {
+        this.location = parentStructure.getLocation();
+        updateImage();
     }
 }

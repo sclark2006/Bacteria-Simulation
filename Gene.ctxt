@@ -22,5 +22,5 @@ comment7.target=Gene\ insertAfter(Gene)
 comment8.params=newGene
 comment8.target=Gene\ add(Gene)
 comment9.params=cell
-comment9.target=ProteinStructure\ expressOrgan(Cell)
+comment9.target=ProteinStructure\ expressStructure(Cell)
 numComments=12

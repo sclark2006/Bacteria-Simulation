@@ -13,14 +13,14 @@ public final class Gene extends ExtensibleEnum<Gene> {
     
     BuildCellSpace = newGene(Cell.class,new Size(150,90), Shape.CIRCLE),
     BuildMotionStructure = newGene(MotionStructure.class, new Size(10,30), Shape.LINE), 
-    BuildDigestiveOrgan =newGene(DigestiveOrgan.class, new Size(30,30), Shape.CIRCLE),
-    BuildChromosome =newGene(Chromosome.class),
+    BuildDigestiveOrgan =newGene(DigestiveOrgan.class, new Size(30,30), Shape.CIRCLE),    
+    BuildCellWhall = newGene(CellWall.class),            
     BuildMembrane = newGene(Membrane.class),
     BuildCytosome = newGene(Cytosome.class),
+    BuildChromosome =newGene(Chromosome.class),
     BuildRybosome = newGene(Rybosome.class,new Size(6,6), Shape.CIRCLE),
     BuildLightPerceiver = newGene(LightPerceiver.class, new Size(16,10),Shape.CIRCLE),
-    BuildLightEmitter = newGene(LightEmitter.class, new Size(16,10), Shape.CIRCLE),
-    BuildCellWhall = newGene(CellWall.class, null, Shape.CIRCLE),
+    BuildLightEmitter = newGene(LightEmitter.class, new Size(16,10), Shape.CIRCLE),    
             
     BuildOrganBuilderStopper = newGene(OrganBuilderStopper.class, 10),
     BuildMembraneDestroyer = newGene(MembraneDestroyer.class,0),

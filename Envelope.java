@@ -7,8 +7,8 @@
  */
 public abstract class Envelope extends ProteinStructure
 {
-    public Envelope(Cell cell, Shape shape ){
-         super(cell, cell.getSize(), shape);
+    public Envelope(Cell cell){
+         super(cell, cell.getSize(), cell.getShape());
     }
     
 }

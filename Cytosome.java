@@ -12,21 +12,13 @@ public final class Cytosome extends Soma
     public static final int TRANSPARENCY = 200;
     private Queue<Enzyme> enzymeQueue;
     
-    public Cytosome(Cell cell,Shape shape ) {
-        super(cell, shape);
+    public Cytosome(Cell cell) {
+        super(cell);
         createSelfImage(); 
         enzymeQueue = new PriorityQueue<Enzyme>();
     }
-        
-    public Cytosome(Membrane membrane){
-        this(membrane.getCell(),membrane.getShape());
-    }
     
-        @Override
-    public void onAddedToParent() {
-        this.location = parentStructure.getLocation();
-        updateImage();
-    }
+
    
     @Override
     public void createSelfImage() {

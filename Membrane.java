@@ -9,8 +9,8 @@ import java.awt.Color;
  */
 public final class Membrane extends Envelope {
 
-    public Membrane(Cell cell, Shape shape) {
-        super(cell, shape);
+    public Membrane(Cell cell) {
+        super(cell);
         createSelfImage();
     }
 
@@ -23,7 +23,7 @@ public final class Membrane extends Envelope {
 
     @Override
     public void onAddedToParent() {
-        this.location = parentStructure.getLocation();
+        this.location = parentStructure.getLocation();        
         updateImage();
     }
 

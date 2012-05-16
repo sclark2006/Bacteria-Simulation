@@ -12,8 +12,8 @@ import java.awt.Color;
  */
 public final class CellWall extends Envelope
 {
-    public CellWall(Cell cell, Shape shape ){
-         super(cell,shape);
+    public CellWall(Cell cell){
+         super(cell);
          createSelfImage();
          this.location = new Location(0,0);
          updateImage();

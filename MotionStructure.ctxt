@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.params=cell\ size\ shape
+comment0.target=MotionStructure(Cell,\ Size,\ Shape)
+comment1.params=
+comment1.target=void\ onAddedToParent()
+comment2.params=
+comment2.target=void\ createSelfImage()
+comment3.params=
+comment3.target=void\ act()
+comment3.text=\r\n\ Act\ -\ do\ whatever\ the\ MotionStructure\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
+comment4.params=
+comment4.target=java.lang.Class\ getParentType()
+numComments=5
