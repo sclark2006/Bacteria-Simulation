@@ -13,20 +13,25 @@ public class Cell extends ProteinStructure
     public Envelope envelope;
     public Soma soma;
     private Set<Chromosome> genome;
-
+    
+   public Cell(Cell parentCell, Size size, Shape shape) {
+        super(parentCell, size, shape);
+        this.location = new Location(0,0);
+    }
+   
     public Cell(Size size, Shape shape) {
         super(null, size, shape);
         this.location = new Location(0,0);
     }
     
     public static Cell defaultInstance() {
-        Cell cell = new Cell(new Size(150,90), Shape.CIRCLE);
-        cell.envelope =  (Envelope) cell.addSubStructure(new Membrane(cell, Shape.CIRCLE));
-        cell.soma = (Cytosome) cell.addSubStructure(new Cytosome((Membrane)cell.envelope));
+        
+        Cell cell = Gene.BuildCellSpace.expressStructure(null);
+        cell.envelope =  (Envelope) cell.addSubStructure(Gene.BuildMembrane.expressStructure(cell));
+        cell.soma = (Cytosome) cell.addSubStructure(Gene.BuildCytosome.expressStructure(cell) );
         cell.genome = Cell.initialGenome(cell.soma);
         cell.addSubStructure(Gene.BuildRybosome.expressStructure(cell) );
-        //cell.addSubStructure(new Rybosome((Cytosome)cell.soma));
-        //cell.addSubStructure(Gene.BuildMotionOrgan.expressStructure(cell) );
+        cell.addSubStructure(Gene.BuildMotionStructure.expressStructure(cell) );
         
         return cell;
     }

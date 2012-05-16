@@ -1,13 +1,13 @@
 
 /**
- * Write a description of class MotionOrgan here.
+ * Write a description of class MotionStructure here.
  * 
  * @author Frederick Clark
  * @version May 2, 2012
  */
-public final class MotionOrgan extends ProteinStructure
+public final class MotionStructure extends ProteinStructure
 {
-     public MotionOrgan(Cell cell, Size size, Shape shape){
+     public MotionStructure(Cell cell, Size size, Shape shape){
          super(cell,size,shape);
         createSelfImage(); 
     }
@@ -22,7 +22,7 @@ public final class MotionOrgan extends ProteinStructure
     @Override
     public void createSelfImage() {}
     /**
-     * Act - do whatever the MotionOrgan wants to do. This method is called whenever
+     * Act - do whatever the MotionStructure wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     @Override

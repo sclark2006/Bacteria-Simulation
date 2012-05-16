@@ -10,8 +10,9 @@ import java.lang.reflect.Constructor;
  */
 public final class Gene extends ExtensibleEnum<Gene> {
     public static final Gene 
-            
-    BuildMotionOrgan = newGene(MotionOrgan.class, new Size(10,30), Shape.LINE), 
+    
+    BuildCellSpace = newGene(Cell.class,new Size(150,90), Shape.CIRCLE),
+    BuildMotionStructure = newGene(MotionStructure.class, new Size(10,30), Shape.LINE), 
     BuildDigestiveOrgan =newGene(DigestiveOrgan.class, new Size(30,30), Shape.CIRCLE),
     BuildMembrane = newGene(Membrane.class, Shape.CIRCLE),
     BuildCytosome = newGene(Cytosome.class, Shape.CIRCLE),
