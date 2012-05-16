@@ -1,9 +1,15 @@
 #BlueJ class context
-comment0.params=membrane
-comment0.target=Cytosome(Membrane)
-comment1.params=
-comment1.target=void\ createSelfImage()
+comment0.params=cell\ shape
+comment0.target=Cytosome(Cell,\ Shape)
+comment1.params=membrane
+comment1.target=Cytosome(Membrane)
 comment2.params=
-comment2.target=void\ act()
-comment2.text=\r\n\ Act\ -\ do\ whatever\ the\ Citosoma\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
-numComments=3
+comment2.target=void\ createSelfImage()
+comment3.params=
+comment3.target=void\ act()
+comment3.text=\r\n\ Act\ -\ do\ whatever\ the\ Cytosome\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
+comment4.params=
+comment4.target=java.util.Queue\ getEnzymeQueue()
+comment5.params=
+comment5.target=java.lang.Class\ getParentType()
+numComments=6

@@ -13,7 +13,8 @@ public final class Rybosome extends ProteinStructure
     public Rybosome(Cell cell, Size size, Shape shape){
          super(cell,size,shape);
          createSelfImage();
-         updateImage(this.getRandomLocation(20));
+         this.location = this.randomLocation(20);
+         updateImage();
     }
     
     public Rybosome(Cytosome cytosome) {
@@ -41,21 +42,23 @@ public final class Rybosome extends ProteinStructure
             currentChromosome = genome.next();
             currentGene = currentChromosome.first;
         }
-        
-        if(currentGene.isActive()) {  
-            //Create a protein from the current Gene             
-            if(currentGene.getProteinToBuild().isAssignableFrom(ProteinStructure.class)) {
-                ProteinStructure structure = currentGene.expressOrgan(this.getCell());
-                ProteinStructure parent = this.getCell().getSubStructureByType(structure.getParentType());
-                 parent.addSubStructure(structure);
-            }else if(currentGene.getProteinToBuild().isAssignableFrom(Enzyme.class)) {
-                ((Cytosome)this.parentStructure).getEnzymeQueue().add(currentGene.expressEnzyme());
+        if(currentGene != null) {
+            if (currentGene != null && currentGene.isActive()) {  
+                //Create a protein from the current Gene             
+                if(currentGene.getProteinToBuild().isAssignableFrom(ProteinStructure.class)) {
+                    ProteinStructure structure = currentGene.expressStructure(this.getCell());
+                    ProteinStructure parent = this.getCell().getSubStructureByType(structure.getParentType());
+                    parent.addSubStructure(structure);
+                }else if(currentGene.getProteinToBuild().isAssignableFrom(Enzyme.class)) {
+                    ((Cytosome)this.parentStructure).getEnzymeQueue().add(currentGene.expressEnzyme());
+                }
+                //parentStructure
+
             }
-            //parentStructure
-            
-        }
         //Updates the current gene
+        
         currentGene = currentGene.next;
+        }
     }
 
     @Override

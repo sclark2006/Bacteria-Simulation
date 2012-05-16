@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.params=width\ height
+comment0.target=Size(int,\ int)
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ Size\r\n
+comment1.params=
+comment1.target=int\ getHeight()
+comment2.params=
+comment2.target=int\ getWidth()
+comment3.params=obj
+comment3.target=boolean\ equals(java.lang.Object)
+comment4.params=
+comment4.target=int\ hashCode()
+numComments=5

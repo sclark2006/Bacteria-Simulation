@@ -15,19 +15,27 @@ public final class Cytosome extends Soma
     public Cytosome(Cell cell,Shape shape ) {
         super(cell, shape);
         createSelfImage(); 
-        updateImage(cell.getLocation());
         enzymeQueue = new PriorityQueue<Enzyme>();
     }
-    
+        
     public Cytosome(Membrane membrane){
         this(membrane.getCell(),membrane.getShape());
+    }
+    
+        @Override
+    public void onAddedToParent() {
+        this.location = parentStructure.getLocation();
+        updateImage();
     }
    
     @Override
     public void createSelfImage() {
+        this.location = cell.getLocation();
+        this.size = cell.getSize();
         this.getImage().setColor(Color.WHITE );
         this.getImage().setTransparency(TRANSPARENCY);
-        this.fillImage(this.location, this.size);
+        //this.fillImage(this.location, this.size);
+        this.fillImage();
     }
     
     /**
@@ -36,14 +44,14 @@ public final class Cytosome extends Soma
      */
     @Override 
     public void act() 
-    {
-        Enzyme enzyme = enzymeQueue.peek();
-        if(enzyme != null) {
+    {       
+        for(Enzyme enzyme : enzymeQueue) {
             if(enzyme.isActive())
                 enzyme.act();
             else
-                enzymeQueue.poll();
+                enzymeQueue.remove(enzyme);
         }
+        
     }
 
     public Queue<Enzyme> getEnzymeQueue() {

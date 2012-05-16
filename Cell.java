@@ -16,6 +16,7 @@ public class Cell extends ProteinStructure
 
     public Cell(Size size, Shape shape) {
         super(null, size, shape);
+        this.location = new Location(0,0);
     }
     
     public static Cell defaultInstance() {
@@ -23,7 +24,10 @@ public class Cell extends ProteinStructure
         cell.envelope =  (Envelope) cell.addSubStructure(new Membrane(cell, Shape.CIRCLE));
         cell.soma = (Cytosome) cell.addSubStructure(new Cytosome((Membrane)cell.envelope));
         cell.genome = Cell.initialGenome(cell.soma);
-        cell.addSubStructure(new Rybosome((Cytosome)cell.soma));
+        cell.addSubStructure(Gene.BuildRybosome.expressStructure(cell) );
+        //cell.addSubStructure(new Rybosome((Cytosome)cell.soma));
+        //cell.addSubStructure(Gene.BuildMotionOrgan.expressStructure(cell) );
+        
         return cell;
     }
 
@@ -58,9 +62,9 @@ public class Cell extends ProteinStructure
         Set<Chromosome> initGenome = new HashSet<Chromosome>();
         Chromosome chromosome = new Chromosome(parent);
         //fill the chromosome with the needed genes
-        chromosome.add(Gene.BuildDuplicationStarter).
-                   add(Gene.BuildChromosomeClonner).
-                   add(Gene.BuildDuplicationStopper); 
+        chromosome.add(Gene.BuildMotionStarter);
+                   //add(Gene.BuildChromosomeClonner).
+                   //add(Gene.BuildDuplicationStopper); 
                     
         chromosome.setParentStructure(parent);
         initGenome.add(chromosome);

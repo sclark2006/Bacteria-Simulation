@@ -1,0 +1,23 @@
+#BlueJ class context
+comment0.params=name\ ordinal
+comment0.target=ExtensibleEnum(java.lang.String,\ int)
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ Gene2\r\n
+comment1.params=
+comment1.target=java.lang.String\ name()
+comment2.params=
+comment2.target=int\ ordinal()
+comment3.params=
+comment3.target=int\ hashCode()
+comment4.params=other
+comment4.target=boolean\ equals(java.lang.Object)
+comment5.params=
+comment5.target=java.lang.Object\ clone()
+comment6.params=
+comment6.target=java.lang.String\ toString()
+comment7.params=enumType\ name
+comment7.target=ExtensibleEnum\ valueOf(java.lang.Class,\ java.lang.String)
+comment8.params=
+comment8.target=ExtensibleEnum[]\ values()
+comment9.params=enumType\ name
+comment9.target=ExtensibleEnum\ newInstance(java.lang.Class,\ java.lang.String)
+numComments=10

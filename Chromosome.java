@@ -12,13 +12,18 @@ public final class Chromosome extends ProteinStructure
 
     public Chromosome(Cell cell, Size size, Shape shape ){
          super( cell,size,shape);
-         createSelfImage();
-         updateImage(this.getRandomLocation(20));
+         createSelfImage();         
     }
+    
     public Chromosome(ProteinStructure parentStructure){
         this(parentStructure.getCell(),new Size(30,30),Shape.IMAGE);
     }
 
+    @Override
+    public void onAddedToParent() {
+        this.location = this.randomLocation(20);
+         updateImage();
+    }
     @Override
     public void createSelfImage() {
         setImage("chromosome1.gif");

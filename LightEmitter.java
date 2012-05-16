@@ -10,7 +10,8 @@ public final class LightEmitter extends Emitter
     public LightEmitter(Cell cell, Size size, Shape shape, int maxLevel){
          super(cell,size,shape,maxLevel);
          createSelfImage();
-         updateImage(this.getRandomLocation(20));
+         this.location = this.randomLocation(20);
+         updateImage();
     }
     //TODO: Implement this method
     @Override

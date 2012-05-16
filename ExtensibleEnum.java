@@ -13,7 +13,7 @@ import java.util.LinkedHashMap;
  */
 public abstract class ExtensibleEnum<E extends ExtensibleEnum<E>>
 {
-    private static LinkedHashMap<String,Object> GENES_DICTIONARY = new LinkedHashMap<>();
+    private static LinkedHashMap<String,Object> GENES_DICTIONARY = new LinkedHashMap<String,Object>();
     private static int nextOrdinal = 0;
     // instance variables - replace the example below with your own
     private final String _name;
@@ -75,7 +75,7 @@ public abstract class ExtensibleEnum<E extends ExtensibleEnum<E>>
             throws IllegalArgumentException {
 
         try {
-            Constructor ctor = enumType.getConstructor(String.class, int.class);
+            Constructor ctor = enumType.getDeclaredConstructor(String.class, int.class);
             T extEnum = (T)ctor.newInstance(name, nextOrdinal);
             GENES_DICTIONARY.put(name, extEnum);
             nextOrdinal++;
@@ -83,7 +83,8 @@ public abstract class ExtensibleEnum<E extends ExtensibleEnum<E>>
         }
         //catch(NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
         catch(Exception e) {
-        throw new IllegalArgumentException("The class "+enumType.getSimpleName() + " doesn't inherits " + ExtensibleEnum.class.getSimpleName());
+            throw new IllegalArgumentException(e);
+            //throw new IllegalArgumentException("The class "+enumType.getSimpleName() + " doesn't inherits " + ExtensibleEnum.class.getSimpleName());
         } 
 
     }

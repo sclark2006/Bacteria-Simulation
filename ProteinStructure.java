@@ -74,9 +74,9 @@ public abstract class ProteinStructure extends Protein
         }
     }
     
-    protected void fillImage(Location location, Size size) {
-        int x = location.getX();
-        int y = location.getY();
+    protected void fillImage(Location loc, Size size) {
+        int x = loc.getX();
+        int y = loc.getY();
         int width = size.getWidth();
         int height = size.getHeight();
         
@@ -94,20 +94,20 @@ public abstract class ProteinStructure extends Protein
    
     public abstract void createSelfImage();
     public abstract Class<? extends ProteinStructure> getParentType();
-    public void addedToParent() {}
-    public void removedFromParent(){}
+    public void onAddedToParent() {}
+    public void onRemovedFromParent(){}
    
     public void setParentStructure(ProteinStructure parentStructure) {
+        this.parentStructure = parentStructure;
         if(parentStructure != null) {
             parentStructure.subStructures.add(this);
-            this.addedToParent();
+            this.onAddedToParent();
         }
         else if(this.parentStructure != null) {
             this.parentStructure.subStructures.remove(this);
-            this.removedFromParent();
+            this.onRemovedFromParent();
             
         }
-        this.parentStructure = parentStructure;
     }
     
     public ProteinStructure addSubStructure(ProteinStructure child) {
@@ -124,13 +124,12 @@ public abstract class ProteinStructure extends Protein
         return child;
     }
     
-    public void updateImage(Location selfLoc) 
+    public void updateImage() 
     {
-        this.location = selfLoc;
-        getImage().rotate(selfLoc.getRotation());
+        getImage().rotate(location.getRotation());
         GreenfootImage image = new GreenfootImage(cell.getSize().getWidth(), cell.getSize().getHeight());
         image.drawImage(getCell().getImage(),0,0); //Draw the previous cell image
-        image.drawImage(this.getImage(), selfLoc.getX(), selfLoc.getY()); //Draw the self image
+        image.drawImage(this.getImage(), location.getX(), location.getY()); //Draw the self image
         getCell().setImage(image); //Updates the cell image
     }
     
@@ -158,9 +157,9 @@ public abstract class ProteinStructure extends Protein
         return this.location;
     }
     
-    public Location getRandomLocation(int margin) {
-        int parentWidth = parentStructure == null ? parentStructure.getSize().getWidth() : cell.getSize().getWidth();
-        int parentHeight = parentStructure == null ? parentStructure.getSize().getHeight() : cell.getSize().getHeight();
+    public Location randomLocation(int margin) {
+        int parentWidth = parentStructure != null ? parentStructure.getSize().getWidth() : cell.getSize().getWidth();
+        int parentHeight = parentStructure != null ? parentStructure.getSize().getHeight() : cell.getSize().getHeight();
         
         int x = randomCoord(parentWidth, this.getSize().getWidth() + margin);
         int y = randomCoord(parentHeight, this.getSize().getHeight() + margin);

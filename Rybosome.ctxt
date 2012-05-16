@@ -1,9 +1,13 @@
 #BlueJ class context
-comment0.params=cytosome
-comment0.target=Rybosome(Cytosome)
-comment1.params=
-comment1.target=void\ createSelfImage()
+comment0.params=cell\ size\ shape
+comment0.target=Rybosome(Cell,\ Size,\ Shape)
+comment1.params=cytosome
+comment1.target=Rybosome(Cytosome)
 comment2.params=
-comment2.target=void\ act()
-comment2.text=\r\n\ Act\ -\ do\ whatever\ the\ Rybosome\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
-numComments=3
+comment2.target=void\ createSelfImage()
+comment3.params=
+comment3.target=void\ act()
+comment3.text=\r\n\ Act\ -\ do\ whatever\ the\ Rybosome\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
+comment4.params=
+comment4.target=java.lang.Class\ getParentType()
+numComments=5

@@ -15,7 +15,8 @@ public final class CellWall extends Envelope
     public CellWall(Cell cell, Shape shape ){
          super(cell,shape);
          createSelfImage();
-         updateImage(new Location(0,0));
+         this.location = new Location(0,0);
+         updateImage();
     }
     
     @Override
