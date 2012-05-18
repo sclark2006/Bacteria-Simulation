@@ -26,6 +26,7 @@ public final class Membrane extends Envelope {
      */
     @Override
     public void act() {
+        //updateImage();
         // Add your action code here.
     }
 

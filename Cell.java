@@ -31,7 +31,7 @@ public class Cell extends ProteinStructure
         cell.soma = (Cytosome) cell.addSubStructure(Gene.BuildCytosome.expressStructure(cell));
         cell.genome = Cell.initialGenome(cell.soma);
         cell.addSubStructure(Gene.BuildRybosome.expressStructure(cell) );
-        cell.addSubStructure(Gene.BuildMotionStructure.expressStructure(cell) );
+        cell.addSubStructure(Gene.BuildMotionStructureAtEast.expressStructure(cell) );
         
         return cell;
     }

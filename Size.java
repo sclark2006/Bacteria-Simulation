@@ -53,5 +53,21 @@ public class Size
         return hash;
     }
     
+    public Size increase(int increment) {
+        this.width += increment;
+        this.height += increment;
+        return this;
+    }
     
+    public Size increase(int incWidth, int incHeight) {
+        this.width += incWidth;
+        this.height += incHeight;        
+        return this;
+    }
+    
+    public Size increase(Size increment) {
+        this.width += increment.width;
+        this.height += increment.height;        
+        return this;
+    }
 }

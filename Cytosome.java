@@ -33,7 +33,8 @@ public final class Cytosome extends Soma
      */
     @Override 
     public void act() 
-    {       
+    {
+        //updateImage();
         for(Enzyme enzyme : enzymeQueue) {
             if(enzyme.isActive())
                 enzyme.act();
