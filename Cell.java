@@ -1,3 +1,4 @@
+import greenfoot.World;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,15 +14,16 @@ public class Cell extends ProteinStructure
     public Envelope envelope;
     public Soma soma;
     private Set<Chromosome> genome;
-    
+    private Set<MotionStructure> motionStructures;
+     
    public Cell(Cell parentCell, Size size, Shape shape) {
         super(parentCell, size, shape);
         this.location = new Location(0,0);
+        motionStructures =  new HashSet<MotionStructure>();
     }
    
     public Cell(Size size, Shape shape) {
-        super(null, size, shape);
-        this.location = new Location(0,0);
+        this(null, size, shape);        
     }
     
     public static Cell defaultInstance() {
@@ -31,11 +33,41 @@ public class Cell extends ProteinStructure
         cell.soma = (Cytosome) cell.addSubStructure(Gene.BuildCytosome.expressStructure(cell));
         cell.genome = Cell.initialGenome(cell.soma);
         cell.addSubStructure(Gene.BuildRybosome.expressStructure(cell) );
-        cell.addSubStructure(Gene.BuildMotionStructureAtEast.expressStructure(cell) );
+        cell.motionStructures.add((MotionStructure)cell.addSubStructure(Gene.BuildMotionStructureAtWest.expressStructure(cell)));
         
         return cell;
     }
+    
+    @Override
+    public void addedToWorld(World world) {
+        for(MotionStructure motor: motionStructures) {
+            world.addObject(motor, this.getX(), this.getY());
+            updateMotor(motor);
+        }
+    }
+    
+    private void updateMotor(MotionStructure motor) {        
+        motor.setRotation(this.getRotation());
+        motor.setLocation(this.getX(), this.getY());
+        motor.move((getImage().getWidth() + motor.getImage().getWidth()) / 2);
+    }
+    
+       @Override
+    public void setRotation(int rotation) {
+        super.setRotation(rotation);
+        for(MotionStructure motor: motionStructures) {
+            updateMotor(motor);
+        }
+    }
 
+    @Override
+    public void setLocation(int x, int y) {
+        super.setLocation(x, y);
+        for(MotionStructure motor: motionStructures) {
+            updateMotor(motor);
+        }
+    }
+    
     public Envelope getEnvelope() {
         return envelope;
     }
@@ -83,5 +115,12 @@ public class Cell extends ProteinStructure
     @Override
     public Class<? extends ProteinStructure> getParentType() {
         return Cell.class;
+    }
+    
+    public boolean isAtWorldLimits() {
+        return getX() > getWorld().getWidth() - this.getSize().getWidth() || 
+               getX()== 0 || 
+               getY() > getWorld().getHeight() - this.getSize().getHeight()||
+               getY() == 0;
     }
 }

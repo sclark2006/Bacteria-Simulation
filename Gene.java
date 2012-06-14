@@ -12,7 +12,7 @@ public final class Gene extends ExtensibleEnum<Gene> {
     public static final Gene 
     
     BuildCellSpace = newGene(Cell.class,new Size(150,90), Shape.CIRCLE),
-    BuildMotionStructureAtEast = newGene(MotionStructure.class, Orientation.EAST), 
+    BuildMotionStructureAtWest = newGene(MotionStructure.class, Orientation.WEST), 
     BuildDigestiveOrgan =newGene(DigestiveOrgan.class, new Size(30,30), Shape.CIRCLE),    
     BuildCellWhall = newGene(CellWall.class),            
     BuildMembrane = newGene(Membrane.class),

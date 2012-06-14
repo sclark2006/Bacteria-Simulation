@@ -5,7 +5,7 @@
  * @version May 16, 2012
  */
 public enum Orientation {
-    NORTH(90), SOUTH(270), EAST(0), WEST(180), NORTH_EAST(45), NORTH_WEST(135), SOUTH_WEAST(225), SOUT_EAST(315), ;
+    NORTH(270), SOUTH(90), EAST(0), WEST(180), SOUTH_EAST(45), SOUTH_WEST(135), NORTH_WEAST(225), NORTH_EAST(315), ;
     private int rotation;
     
     private Orientation(int rotation) {

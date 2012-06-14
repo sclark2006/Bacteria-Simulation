@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.params=rotation
+comment0.target=Orientation(int)
+comment1.params=
+comment1.target=int\ getRotation()
+comment2.params=
+comment2.target=int\ getUpperBound()
+comment3.params=
+comment3.target=int\ getLowerbound()
+comment4.params=rotation
+comment4.target=Orientation\ getOrientation(int)
+numComments=5
