@@ -1,6 +1,6 @@
 #BlueJ class context
-comment0.params=width\ height\ shape\ parentOrgan\ minLevel\ maxLevel
-comment0.target=Perceiver(int,\ int,\ OrganShape,\ Organ,\ int,\ int)
+comment0.params=cell\ parentOrgan\ size\ shape\ minLevel\ maxLevel
+comment0.target=Perceiver(Cell,\ Organ,\ Size,\ Shape,\ int,\ int)
 comment1.params=
 comment1.target=int\ getMinLevel()
 comment2.params=

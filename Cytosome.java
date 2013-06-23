@@ -24,7 +24,7 @@ public final class Cytosome extends Organ
     public void createSelfImage() {
         this.getImage().setColor(Color.WHITE );
         this.getImage().setTransparency(TRANSPARENCY);
-        this.fillImage(this.location, this.size);
+        this.fillImage(this.parentOrgan.getLocation(), this.size);
     }
     
     /**

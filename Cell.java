@@ -23,11 +23,14 @@ public class Cell extends Actor
     private List<Organ> organelles;
     private Set<Chromosome> genome;
     private Size size;
+    private Location location;
     
-    public Cell() {
+    public Cell(Location location) {
         super();
         this.size = SIZE;
+        this.location = location;
         this.membrane = new Membrane(this,null,size,Shape.CIRCLE);
+        this.membrane.updateImage(location);
         this.cytosome = new Cytosome(this.membrane);
         this.genome = initialGenome();
         this.organelles = new ArrayList<Organ>();

@@ -7,8 +7,8 @@
 public final class Rybosome extends Organ
 {
     private java.util.Iterator<Chromosome> genome;
-    private Chromosome currentChromosome;
-    private Gene currentGene;
+    private Chromosome currentChromosome = null;
+    private Gene currentGene = null;
     
     public Rybosome(Cell cell, Organ parentOrgan, Size size, Shape shape){
          super(cell,parentOrgan,size,shape);
@@ -36,7 +36,11 @@ public final class Rybosome extends Organ
     {
         // Add your action code here
         //Updates teh current chromosome
-        if(currentChromosome == null)
+    	if(!genome.hasNext()) {
+    		genome = getCell().getGenome().iterator();
+    	}
+    	
+        if(currentChromosome == null || currentGene == null)
         {
             currentChromosome = genome.next();
             currentGene = currentChromosome.first;

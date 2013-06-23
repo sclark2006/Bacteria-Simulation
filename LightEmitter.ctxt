@@ -1,6 +1,6 @@
 #BlueJ class context
-comment0.params=width\ height\ shape\ parentOrgan\ maxLevel
-comment0.target=LightEmitter(int,\ int,\ OrganShape,\ Organ,\ int)
+comment0.params=cell\ parentOrgan\ size\ shape\ maxLevel
+comment0.target=LightEmitter(Cell,\ Organ,\ Size,\ Shape,\ int)
 comment1.params=
 comment1.target=void\ createSelfImage()
 comment2.params=

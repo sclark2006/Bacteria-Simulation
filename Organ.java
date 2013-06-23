@@ -25,7 +25,7 @@ public abstract class Organ extends Protein
         if(!shape.equals(Shape.IMAGE))
             this.setImage(new GreenfootImage(size.getWidth(), size.getHeight()));
         this.parentOrgan = parentOrgan;
-        this.children = new ArrayList<>();
+        this.children = new ArrayList<Organ>();
         this.cell = cell;
         if(parentOrgan != null)
             this.parentOrgan.getChildren().add(this);
@@ -54,6 +54,15 @@ public abstract class Organ extends Protein
                             break;
             case TRIANGLE: this.getImage().drawPolygon(new int[]{(int)(width/2),0,width}, new int[]{0, height,height}, 3);
                             break;
+		case HEXAGON:
+			break;
+		case IMAGE:
+			break;
+		case OCTAGON:
+			break;
+		default:
+			break;
+
         }
     }
     
@@ -70,6 +79,15 @@ public abstract class Organ extends Protein
                             break;
             case TRIANGLE: this.getImage().fillPolygon(new int[]{(int)(width/2),0,width}, new int[]{0, height,height}, 3);
                             break;
+		case HEXAGON:
+			break;
+		case IMAGE:
+			break;
+		case OCTAGON:
+			break;
+		default:
+			break;
+
         }
     }
     
@@ -88,6 +106,14 @@ public abstract class Organ extends Protein
                             break;
             case TRIANGLE: this.getImage().fillPolygon(new int[]{(int)(width/2),x,width}, new int[]{y, height,height}, 3);
                             break;
+		case HEXAGON:
+			break;
+		case IMAGE:
+			break;
+		case OCTAGON:
+			break;
+		default:
+			break;
         }
     }
    

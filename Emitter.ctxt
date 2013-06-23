@@ -1,9 +1,11 @@
 #BlueJ class context
-comment0.params=width\ height\ shape\ parentOrgan\ maxLevel
-comment0.target=Emitter(int,\ int,\ OrganShape,\ Organ,\ int)
+comment0.params=cell\ parentOrgan\ size\ shape\ maxLevel
+comment0.target=Emitter(Cell,\ Organ,\ Size,\ Shape,\ int)
 comment1.params=
-comment1.target=void\ emit()
+comment1.target=int\ getMaxLevel()
 comment2.params=
-comment2.target=void\ act()
-comment2.text=\r\n\ Act\ -\ do\ whatever\ the\ Emitter\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
-numComments=3
+comment2.target=void\ emit()
+comment3.params=
+comment3.target=void\ act()
+comment3.text=\r\n\ Act\ -\ do\ whatever\ the\ Emitter\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
+numComments=4

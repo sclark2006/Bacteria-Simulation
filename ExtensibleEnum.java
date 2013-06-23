@@ -1,6 +1,5 @@
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedHashMap;
 //import java.util.Map;
 
@@ -13,7 +12,7 @@ import java.util.LinkedHashMap;
  */
 public abstract class ExtensibleEnum<E extends ExtensibleEnum<E>>
 {
-    private static LinkedHashMap<String,Object> GENES_DICTIONARY = new LinkedHashMap<>();
+    private static LinkedHashMap<String,Object> GENES_DICTIONARY = new LinkedHashMap<String,Object>();
     private static int nextOrdinal = 0;
     // instance variables - replace the example below with your own
     private final String _name;
@@ -57,7 +56,8 @@ public abstract class ExtensibleEnum<E extends ExtensibleEnum<E>>
     }
         
     public static  <T extends ExtensibleEnum<T>> T valueOf(Class<T> enumType, String name) {       
-        T result = (T) GENES_DICTIONARY.get(name);
+        @SuppressWarnings("unchecked")
+		T result = (T) GENES_DICTIONARY.get(name);
         if (result != null)
             return result;
         if (name == null)
@@ -67,7 +67,8 @@ public abstract class ExtensibleEnum<E extends ExtensibleEnum<E>>
     }
         
     public static <T extends ExtensibleEnum<T>> T [] values() {
-        final T[] extEnums = (T[])GENES_DICTIONARY.values().toArray();
+        @SuppressWarnings("unchecked")
+		final T[] extEnums = (T[])GENES_DICTIONARY.values().toArray();
         return extEnums;
     }
     
@@ -75,7 +76,7 @@ public abstract class ExtensibleEnum<E extends ExtensibleEnum<E>>
             throws IllegalArgumentException {
 
         try {
-            Constructor ctor = enumType.getConstructor(String.class, int.class);
+            Constructor<T> ctor = enumType.getConstructor(String.class, int.class);
             T extEnum = (T)ctor.newInstance(name, nextOrdinal);
             GENES_DICTIONARY.put(name, extEnum);
             nextOrdinal++;
@@ -83,6 +84,7 @@ public abstract class ExtensibleEnum<E extends ExtensibleEnum<E>>
         }
         //catch(NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
         catch(Exception e) {
+        	e.printStackTrace();
         throw new IllegalArgumentException("The class "+enumType.getSimpleName() + " doesn't inherits " + ExtensibleEnum.class.getSimpleName());
         } 
 

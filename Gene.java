@@ -40,7 +40,7 @@ public final class Gene extends ExtensibleEnum<Gene> {
     public Gene previous;
     
     
-    protected Gene(String name, int ordinal)
+    public Gene(String name, int ordinal)
     {
         super(name,ordinal);
     }
@@ -99,9 +99,10 @@ public final class Gene extends ExtensibleEnum<Gene> {
         return this.insertAfter(newGene);
     }
     
-    public <T extends Organ> T expressOrgan(Cell cell, Organ parentOrgan) {
+    @SuppressWarnings("unchecked")
+	public <T extends Organ> T expressOrgan(Cell cell, Organ parentOrgan) {
         try {
-            Constructor ctor;
+            Constructor<?> ctor;
             T organ = null;
             //Is an Organ?
             if(proteinToBuild.isAssignableFrom(Organ.class)) {
@@ -123,9 +124,10 @@ public final class Gene extends ExtensibleEnum<Gene> {
         } 
     }
     
-    public <T extends Enzyme> T expressEnzyme() {
+    @SuppressWarnings("unchecked")
+	public <T extends Enzyme> T expressEnzyme() {
         try {
-            Constructor ctor;
+            Constructor<?> ctor;
             T enzyme = null;
             //Is an Enzyme?
             if(proteinToBuild.isAssignableFrom(Enzyme.class)) {

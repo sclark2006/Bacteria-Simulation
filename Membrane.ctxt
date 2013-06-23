@@ -1,6 +1,6 @@
 #BlueJ class context
-comment0.params=width\ height\ shape\ cell
-comment0.target=Membrane(int,\ int,\ OrganShape,\ Cell)
+comment0.params=cell\ parentOrgan\ size\ shape
+comment0.target=Membrane(Cell,\ Organ,\ Size,\ Shape)
 comment1.params=
 comment1.target=void\ createSelfImage()
 comment2.params=
